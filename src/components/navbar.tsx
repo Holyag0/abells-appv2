@@ -10,22 +10,23 @@ import { motion } from 'framer-motion'
 import { Link } from './link'
 import { Logo } from './logo'
 import { PlusGrid, PlusGridItem, PlusGridRow } from './plus-grid'
+import { ThemeToggle } from './theme-toggle'
 
 const links = [
-  { href: '/pricing', label: 'Pricing' },
-  { href: '/company', label: 'Company' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/login', label: 'Login' },
+  { href: '/cardapio', label: 'Cardápio Completo' },
+  { href: '/#cardapio', label: 'Destaques' },
+  { href: '/#contato', label: 'Endereço' },
+  { href: '/#contato', label: 'Contato' },
 ]
 
 function DesktopNav() {
   return (
     <nav className="relative hidden lg:flex">
       {links.map(({ href, label }) => (
-        <PlusGridItem key={href} className="relative flex">
+        <PlusGridItem key={label} className="relative flex">
           <Link
             href={href}
-            className="flex items-center px-4 py-3 text-base font-medium text-gray-950 bg-blend-multiply data-hover:bg-black/2.5"
+            className="flex items-center px-4 py-3 text-base font-medium text-gray-950 dark:text-gray-100 bg-blend-multiply data-hover:bg-black/2.5 dark:data-hover:bg-white/5"
           >
             {label}
           </Link>
@@ -38,7 +39,7 @@ function DesktopNav() {
 function MobileNavButton() {
   return (
     <DisclosureButton
-      className="flex size-12 items-center justify-center self-center rounded-lg data-hover:bg-black/5 lg:hidden"
+      className="flex size-12 items-center justify-center self-center rounded-lg data-hover:bg-black/5 dark:data-hover:bg-white/5 lg:hidden text-gray-950 dark:text-white"
       aria-label="Open main menu"
     >
       <Bars2Icon className="size-6" />
@@ -49,7 +50,7 @@ function MobileNavButton() {
 function MobileNav() {
   return (
     <DisclosurePanel className="lg:hidden">
-      <div className="flex flex-col gap-6 py-4">
+      <div className="flex flex-col gap-6 py-4 px-4 bg-white dark:bg-gray-950 rounded-b-2xl border-t border-black/5 dark:border-white/5">
         {links.map(({ href, label }, linkIndex) => (
           <motion.div
             initial={{ opacity: 0, rotateX: -90 }}
@@ -59,17 +60,17 @@ function MobileNav() {
               ease: 'easeInOut',
               rotateX: { duration: 0.3, delay: linkIndex * 0.1 },
             }}
-            key={href}
+            key={label}
           >
-            <Link href={href} className="text-base font-medium text-gray-950">
+            <Link href={href} className="text-base font-medium text-gray-950 dark:text-gray-100 block">
               {label}
             </Link>
           </motion.div>
         ))}
       </div>
       <div className="absolute left-1/2 w-screen -translate-x-1/2">
-        <div className="absolute inset-x-0 top-0 border-t border-black/5" />
-        <div className="absolute inset-x-0 top-2 border-t border-black/5" />
+        <div className="absolute inset-x-0 top-0 border-t border-black/5 dark:border-white/5" />
+        <div className="absolute inset-x-0 top-2 border-t border-black/5 dark:border-white/5" />
       </div>
     </DisclosurePanel>
   )
@@ -92,8 +93,11 @@ export function Navbar({ banner }: { banner?: React.ReactNode }) {
               </div>
             )}
           </div>
-          <DesktopNav />
-          <MobileNavButton />
+          <div className="flex items-center gap-4">
+            <DesktopNav />
+            {/* <ThemeToggle /> */}
+            {/* <MobileNavButton /> */}
+          </div>
         </PlusGridRow>
       </PlusGrid>
       <MobileNav />

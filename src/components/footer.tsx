@@ -10,20 +10,19 @@ function CallToAction() {
   return (
     <div className="relative pt-20 pb-16 text-center sm:py-24">
       <hgroup>
-        <Subheading>Get started</Subheading>
-        <p className="mt-6 text-3xl font-medium tracking-tight text-gray-950 sm:text-5xl">
-          Ready to dive in?
+        <Subheading>Ficou com fome?</Subheading>
+        <p className="mt-6 text-3xl font-medium tracking-tight text-gray-950 dark:text-white sm:text-5xl">
+          Peça o seu agora mesmo.
           <br />
-          Start your free trial today.
+          Entregamos rapidinho na sua casa.
         </p>
       </hgroup>
-      <p className="mx-auto mt-6 max-w-xs text-sm/6 text-gray-500">
-        Get the cheat codes for selling and unlock your team&apos;s revenue
-        potential.
+      <p className="mx-auto mt-6 max-w-xs text-sm/6 text-gray-500 dark:text-gray-400">
+        O melhor blend, o pão mais macio e aquele molho especial que só a gente tem.
       </p>
       <div className="mt-6">
-        <Button className="w-full sm:w-auto" href="#">
-          Get started
+        <Button className="w-full sm:w-auto" href="#pedir">
+          Pedir no WhatsApp
         </Button>
       </div>
     </div>
@@ -31,7 +30,7 @@ function CallToAction() {
 }
 
 function SitemapHeading({ children }: { children: React.ReactNode }) {
-  return <h3 className="text-sm/6 font-medium text-gray-950/50">{children}</h3>
+  return <h3 className="text-sm/6 font-medium text-white/60">{children}</h3>
 }
 
 function SitemapLinks({ children }: { children: React.ReactNode }) {
@@ -43,7 +42,7 @@ function SitemapLink(props: React.ComponentPropsWithoutRef<typeof Link>) {
     <li>
       <Link
         {...props}
-        className="font-medium text-gray-950 data-hover:text-gray-950/75"
+        className="font-medium text-white/90 data-hover:text-amber-500 transition-colors"
       />
     </li>
   )
@@ -53,33 +52,11 @@ function Sitemap() {
   return (
     <>
       <div>
-        <SitemapHeading>Product</SitemapHeading>
+        <SitemapHeading>Menu</SitemapHeading>
         <SitemapLinks>
-          <SitemapLink href="/pricing">Pricing</SitemapLink>
-          <SitemapLink href="#">Analysis</SitemapLink>
-          <SitemapLink href="#">API</SitemapLink>
-        </SitemapLinks>
-      </div>
-      <div>
-        <SitemapHeading>Company</SitemapHeading>
-        <SitemapLinks>
-          <SitemapLink href="#">Careers</SitemapLink>
-          <SitemapLink href="/blog">Blog</SitemapLink>
-          <SitemapLink href="/company">Company</SitemapLink>
-        </SitemapLinks>
-      </div>
-      <div>
-        <SitemapHeading>Support</SitemapHeading>
-        <SitemapLinks>
-          <SitemapLink href="#">Help center</SitemapLink>
-          <SitemapLink href="#">Community</SitemapLink>
-        </SitemapLinks>
-      </div>
-      <div>
-        <SitemapHeading>Company</SitemapHeading>
-        <SitemapLinks>
-          <SitemapLink href="#">Terms of service</SitemapLink>
-          <SitemapLink href="#">Privacy policy</SitemapLink>
+          <SitemapLink href="#cardapio">Hambúrgueres</SitemapLink>
+          <SitemapLink href="/cardapio">Cardápio Completo</SitemapLink>
+          <SitemapLink href="#contato">Endereço & Contato</SitemapLink>
         </SitemapLinks>
       </div>
     </>
@@ -106,10 +83,12 @@ function SocialIconFacebook(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
-function SocialIconLinkedIn(props: React.ComponentPropsWithoutRef<'svg'>) {
+function SocialIconInstagram(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
-    <svg viewBox="0 0 16 16" fill="currentColor" {...props}>
-      <path d="M14.82 0H1.18A1.169 1.169 0 000 1.154v13.694A1.168 1.168 0 001.18 16h13.64A1.17 1.17 0 0016 14.845V1.15A1.171 1.171 0 0014.82 0zM4.744 13.64H2.369V5.996h2.375v7.644zm-1.18-8.684a1.377 1.377 0 11.52-.106 1.377 1.377 0 01-.527.103l.007.003zm10.075 8.683h-2.375V9.921c0-.885-.015-2.025-1.234-2.025-1.218 0-1.425.966-1.425 1.968v3.775H6.233V5.997H8.51v1.05h.032c.317-.601 1.09-1.235 2.246-1.235 2.405-.005 2.851 1.578 2.851 3.63v4.197z" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
     </svg>
   )
 }
@@ -120,26 +99,26 @@ function SocialLinks() {
       <Link
         href="https://facebook.com"
         target="_blank"
-        aria-label="Visit us on Facebook"
-        className="text-gray-950 data-hover:text-gray-950/75"
+        aria-label="Siga-nos no Facebook"
+        className="text-gray-950 dark:text-white data-hover:text-gray-950/75 dark:data-hover:text-white/75"
       >
         <SocialIconFacebook className="size-4" />
       </Link>
       <Link
-        href="https://x.com"
+        href="https://www.instagram.com/abells_burger/"
         target="_blank"
-        aria-label="Visit us on X"
-        className="text-gray-950 data-hover:text-gray-950/75"
+        aria-label="Siga-nos no Instagram"
+        className="text-gray-950 dark:text-white data-hover:text-gray-950/75 dark:data-hover:text-white/75"
       >
-        <SocialIconX className="size-4" />
+        <SocialIconInstagram className="size-4" />
       </Link>
       <Link
-        href="https://linkedin.com"
+        href="https://x.com"
         target="_blank"
-        aria-label="Visit us on LinkedIn"
-        className="text-gray-950 data-hover:text-gray-950/75"
+        aria-label="Siga-nos no X"
+        className="text-gray-950 dark:text-white data-hover:text-gray-950/75 dark:data-hover:text-white/75"
       >
-        <SocialIconLinkedIn className="size-4" />
+        <SocialIconX className="size-4" />
       </Link>
     </>
   )
@@ -147,33 +126,37 @@ function SocialLinks() {
 
 function Copyright() {
   return (
-    <div className="text-sm/6 text-gray-950">
-      &copy; {new Date().getFullYear()} Radiant Inc.
+    <div className="text-sm/6 text-white/60">
+      &copy; {new Date().getFullYear()} Abell's Gastroburger. Todos os direitos reservados.
     </div>
   )
 }
 
 export function Footer() {
   return (
-    <footer>
-      <Gradient className="relative">
-        <div className="absolute inset-2 rounded-4xl bg-white/80" />
-        <Container>
+    <footer className="relative mt-24">
+      <Gradient className="relative rounded-t-[2.5rem] sm:rounded-t-[3.5rem] overflow-hidden">
+        <div className="absolute inset-2 rounded-[2rem] sm:rounded-[3rem] bg-gray-950/98 backdrop-blur-sm" />
+        
+        <Container className="relative z-10 py-16">
           <CallToAction />
-          <PlusGrid className="pb-16">
+          
+          <div className="flex flex-col items-center justify-center py-12 border-t border-white/5">
+            <Logo className="h-20 sm:h-24 mb-6" />
+            <h2 className="text-3xl sm:text-4xl font-black italic tracking-tighter text-white text-center">
+              <span className="text-red-600 dark:text-red-500 text-shadow-glow">Abell's</span> <span className="text-amber-500">Gastroburger</span>
+            </h2>
+          </div>
+
+          <PlusGrid className="pb-16 text-white/70">
             <PlusGridRow>
-              <div className="grid grid-cols-2 gap-y-10 pb-6 lg:grid-cols-6 lg:gap-8">
-                <div className="col-span-2 flex">
-                  <PlusGridItem className="pt-6 lg:pb-6">
-                    <Logo className="h-9" />
-                  </PlusGridItem>
-                </div>
-                <div className="col-span-2 grid grid-cols-2 gap-x-8 gap-y-12 lg:col-span-4 lg:grid-cols-subgrid lg:pt-6">
+              <div className="flex justify-center pb-12">
+                <div className="grid grid-cols-1 text-center">
                   <Sitemap />
                 </div>
               </div>
             </PlusGridRow>
-            <PlusGridRow className="flex justify-between">
+            <PlusGridRow className="flex flex-col sm:flex-row justify-between items-center gap-8">
               <div>
                 <PlusGridItem className="py-3">
                   <Copyright />

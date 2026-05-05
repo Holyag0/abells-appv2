@@ -1,56 +1,82 @@
-import { BentoCard } from '@/components/bento-card'
+'use client'
+
+import { useState } from 'react'
+
 import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { Gradient } from '@/components/gradient'
-import { Keyboard } from '@/components/keyboard'
 import { Link } from '@/components/link'
-import { LinkedAvatars } from '@/components/linked-avatars'
-import { LogoCloud } from '@/components/logo-cloud'
-import { LogoCluster } from '@/components/logo-cluster'
-import { LogoTimeline } from '@/components/logo-timeline'
-import { Map } from '@/components/map'
 import { Navbar } from '@/components/navbar'
-import { Screenshot } from '@/components/screenshot'
+import { MenuCarousel } from '@/components/menu-carousel'
 import { Testimonials } from '@/components/testimonials'
 import { Heading, Subheading } from '@/components/text'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
+import dynamic from 'next/dynamic'
+import { motion } from 'framer-motion'
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = {
-  description:
-    'Radiant helps you sell more by revealing sensitive information about your customers.',
-}
+const LeafletMap = dynamic(() => import('@/components/leaflet-map'), {
+  ssr: false,
+  loading: () => (
+    <div className="absolute inset-0 bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
+      <p className="text-gray-500 italic">Carregando mapa interativo...</p>
+    </div>
+  ),
+})
 
-function Hero() {
+import { ProductDrawer } from '@/components/product-drawer'
+import type { MenuItem } from '@/components/menu-carousel'
+
+function ContactAndAddressSection() {
   return (
-    <div className="relative">
-      <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
-      <Container className="relative">
-        <Navbar
-          banner={
-            <Link
-              href="/blog/radiant-raises-100m-series-a-from-tailwind-ventures"
-              className="flex items-center gap-1 rounded-full bg-fuchsia-950/35 px-3 py-0.5 text-sm/6 font-medium text-white data-hover:bg-fuchsia-950/30"
-            >
-              Radiant raises $100M Series A from Tailwind Ventures
-              <ChevronRightIcon className="size-4" />
-            </Link>
-          }
-        />
-        <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
-          <h1 className="font-display text-6xl/[0.9] font-medium tracking-tight text-balance text-gray-950 sm:text-8xl/[0.8] md:text-9xl/[0.8]">
-            Close every deal.
-          </h1>
-          <p className="mt-8 max-w-lg text-xl/7 font-medium text-gray-950/75 sm:text-2xl/8">
-            Radiant helps you sell more by revealing sensitive information about
-            your customers.
-          </p>
-          <div className="mt-12 flex flex-col gap-x-6 gap-y-4 sm:flex-row">
-            <Button href="#">Get started</Button>
-            <Button variant="secondary" href="/pricing">
-              See pricing
-            </Button>
+    <div id="contato" className="py-32 bg-gray-50 dark:bg-gray-900 transition-colors">
+      <Container>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="space-y-8">
+            <Subheading>Fale Conosco</Subheading>
+            <Heading as="h2" className="text-4xl">Onde o sabor acontece.</Heading>
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-amber-500/10 rounded-xl text-amber-600 dark:text-amber-500">
+                  <svg className="size-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </div>
+                <div>
+                  <p className="font-bold">Instagram</p>
+                  <a href="https://instagram.com/abellsgastroburguer" target="_blank" className="text-gray-600 dark:text-gray-400 hover:text-amber-600 transition">@abellsgastroburguer</a>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-amber-500/10 rounded-xl text-amber-600 dark:text-amber-500">
+                  <svg className="size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                </div>
+                <div>
+                  <p className="font-bold">Telefone / WhatsApp</p>
+                  <a href="https://wa.me/5585985497108" target="_blank" className="text-gray-600 dark:text-gray-400 hover:text-amber-600 transition">(85) 98549-7108</a>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-amber-500/10 rounded-xl text-amber-600 dark:text-amber-500">
+                  <svg className="size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <div>
+                  <p className="font-bold">Endereço</p>
+                  <p className="text-gray-600 dark:text-gray-400">R. São Pedro, 150 - Fleicheiras, Trairi - CE, 62690-000</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-green-500/10 rounded-xl text-green-600 dark:text-green-500">
+                  <svg className="size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <div>
+                  <p className="font-bold">Delivery Super Rápido</p>
+                  <p className="text-gray-600 dark:text-gray-400">Entrega quente e veloz para toda Flecheiras! 🚀</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="relative rounded-4xl overflow-hidden shadow-2xl ring-1 ring-black/5 dark:ring-white/10 min-h-[400px]">
+             <LeafletMap />
           </div>
         </div>
       </Container>
@@ -58,154 +84,184 @@ function Hero() {
   )
 }
 
-function FeatureSection() {
+function Hero() {
   return (
-    <div className="overflow-hidden">
-      <Container className="pb-24">
-        <Heading as="h2" className="max-w-3xl">
-          A snapshot of your entire sales pipeline.
-        </Heading>
-        <Screenshot
-          width={1216}
-          height={768}
-          src="/screenshots/app.png"
-          className="mt-16 h-144 sm:h-auto sm:w-304"
-        />
-      </Container>
-    </div>
-  )
-}
-
-function BentoSection() {
-  return (
-    <Container>
-      <Subheading>Sales</Subheading>
-      <Heading as="h3" className="mt-2 max-w-3xl">
-        Know more about your customers than they do.
-      </Heading>
-
-      <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
-        <BentoCard
-          eyebrow="Insight"
-          title="Get perfect clarity"
-          description="Radiant uses social engineering to build a detailed financial picture of your leads. Know their budget, compensation package, social security number, and more."
-          graphic={
-            <div className="h-80 bg-[url(/screenshots/profile.png)] bg-size-[1000px_560px] bg-position-[left_-109px_top_-112px] bg-no-repeat" />
-          }
-          fade={['bottom']}
-          className="max-lg:rounded-t-4xl lg:col-span-3 lg:rounded-tl-4xl"
-        />
-        <BentoCard
-          eyebrow="Analysis"
-          title="Undercut your competitors"
-          description="With our advanced data mining, you’ll know which companies your leads are talking to and exactly how much they’re being charged."
-          graphic={
-            <div className="absolute inset-0 bg-[url(/screenshots/competitors.png)] bg-size-[1100px_650px] bg-position-[left_-38px_top_-73px] bg-no-repeat" />
-          }
-          fade={['bottom']}
-          className="lg:col-span-3 lg:rounded-tr-4xl"
-        />
-        <BentoCard
-          eyebrow="Speed"
-          title="Built for power users"
-          description="It’s never been faster to cold email your entire contact list using our streamlined keyboard shortcuts."
-          graphic={
-            <div className="flex size-full pt-10 pl-10">
-              <Keyboard highlighted={['LeftCommand', 'LeftShift', 'D']} />
+    <div className="relative">
+      <Container className="relative">
+        <Navbar />
+        <div className="flex flex-col items-center gap-16 pt-16 pb-24 lg:flex-row lg:items-center lg:py-32">
+          <div className="relative flex-1 flex justify-center">
+            <div className="relative size-80 sm:size-96 lg:size-[450px] shrink-0">
+              <div className="absolute inset-0 rounded-full bg-amber-400/20 blur-3xl" />
+              <motion.img
+                initial={{ scale: 0.8, opacity: 0, rotate: -10 }}
+                animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+                src="/logo-gastro.png"
+                alt="Abell's Gastroburger Logo"
+                className="relative size-full object-contain drop-shadow-2xl"
+              />
             </div>
-          }
-          className="lg:col-span-2 lg:rounded-bl-4xl"
-        />
-        <BentoCard
-          eyebrow="Source"
-          title="Get the furthest reach"
-          description="Bypass those inconvenient privacy laws to source leads from the most unexpected places."
-          graphic={<LogoCluster />}
-          className="lg:col-span-2"
-        />
-        <BentoCard
-          eyebrow="Limitless"
-          title="Sell globally"
-          description="Radiant helps you sell in locations currently under international embargo."
-          graphic={<Map />}
-          className="max-lg:rounded-b-4xl lg:col-span-2 lg:rounded-br-4xl"
-        />
-      </div>
-    </Container>
-  )
-}
-
-function DarkBentoSection() {
-  return (
-    <div className="mx-2 mt-2 rounded-4xl bg-gray-900 py-32">
-      <Container>
-        <Subheading dark>Outreach</Subheading>
-        <Heading as="h3" dark className="mt-2 max-w-3xl">
-          Customer outreach has never been easier.
-        </Heading>
-
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
-          <BentoCard
-            dark
-            eyebrow="Networking"
-            title="Sell at the speed of light"
-            description="Our RadiantAI chat assistants analyze the sentiment of your conversations in real time, ensuring you're always one step ahead."
-            graphic={
-              <div className="h-80 bg-[url(/screenshots/networking.png)] bg-size-[851px_344px] bg-no-repeat" />
-            }
-            fade={['top']}
-            className="max-lg:rounded-t-4xl lg:col-span-4 lg:rounded-tl-4xl"
-          />
-          <BentoCard
-            dark
-            eyebrow="Integrations"
-            title="Meet leads where they are"
-            description="With thousands of integrations, no one will be able to escape your cold outreach."
-            graphic={<LogoTimeline />}
-            // `overflow-visible!` is needed to work around a Chrome bug that disables the mask on the graphic.
-            className="z-10 overflow-visible! lg:col-span-2 lg:rounded-tr-4xl"
-          />
-          <BentoCard
-            dark
-            eyebrow="Meetings"
-            title="Smart call scheduling"
-            description="Automatically insert intro calls into your leads' calendars without their consent."
-            graphic={<LinkedAvatars />}
-            className="lg:col-span-2 lg:rounded-bl-4xl"
-          />
-          <BentoCard
-            dark
-            eyebrow="Engagement"
-            title="Become a thought leader"
-            description="RadiantAI automatically writes LinkedIn posts that relate current events to B2B sales, helping you build a reputation as a thought leader."
-            graphic={
-              <div className="h-80 bg-[url(/screenshots/engagement.png)] bg-size-[851px_344px] bg-no-repeat" />
-            }
-            fade={['top']}
-            className="max-lg:rounded-b-4xl lg:col-span-4 lg:rounded-br-4xl"
-          />
+          </div>
+          <div className="flex-1 text-center lg:text-left">
+            <h1 className="font-display text-6xl/[0.9] font-medium tracking-tight text-balance text-gray-950 dark:text-white sm:text-8xl/[0.8]">
+              <span className="text-red-600 dark:text-red-500">Abell's</span> <span className="text-amber-500">Gastroburger</span>
+            </h1>
+            <p className="mt-8 max-w-lg text-xl/7 font-medium text-gray-950/75 dark:text-gray-100  sm:text-2xl/8 mx-auto lg:mx-0">
+              O sabor autêntico do hambúrguer artesanal. Ingredientes premium e uma experiência gastronômica inigualável.
+            </p>
+            <div className="mt-12 flex flex-col items-center gap-x-6 gap-y-4 sm:flex-row lg:justify-start justify-center">
+              <Button href="#pedir">Pedir Agora</Button>
+              <Button variant="secondary" href="/cardapio">
+                Ver Cardápio Completo
+              </Button>
+            </div>
+          </div>
+        </div>
+        <div className="absolute bottom-24 right-8 hidden lg:flex items-center gap-6 bg-white/10 dark:bg-black/10 backdrop-blur-md p-4 rounded-full ring-1 ring-black/5 dark:ring-white/5">
+          <div className="flex gap-2">
+            <a href="https://www.instagram.com/abells_burger/" target="_blank" className="p-2 bg-amber-500/10 rounded-full text-amber-600 dark:text-amber-500 hover:bg-amber-500/20 transition-colors">
+              <svg className="size-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://wa.me/5585985497108" target="_blank" className="p-2 bg-green-500/10 rounded-full text-green-600 dark:text-green-500 hover:bg-green-500/20 transition-colors">
+              <svg className="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            </a>
+          </div>
+          <div className="w-px h-4 bg-gray-950/10 dark:bg-white/10" />
+          <p className="text-xs font-bold text-gray-950/75 dark:text-gray-300">Terça a domingo | 17h às 23h</p>
         </div>
       </Container>
     </div>
   )
 }
+
+function AboutSection() {
+  return (
+    <div id="sobre-nos" className="py-32 bg-white dark:bg-gray-950 transition-colors">
+      <Container>
+        <div className="flex flex-col lg:flex-row items-center gap-16">
+          <div className="flex-1 relative">
+            <div className="absolute -inset-4 bg-amber-500/20 rounded-full blur-3xl" />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+              className="relative aspect-square rounded-4xl overflow-hidden shadow-2xl ring-1 ring-black/5 dark:ring-white/10"
+            >
+              <img
+                src="/sobre-nos.png"
+                alt="Abell's Gastroburger Passion"
+                className="size-full object-cover"
+              />
+            </motion.div>
+          </div>
+          <div className="flex-1 space-y-8">
+            <Subheading>Nossa História</Subheading>
+            <Heading as="h2" className="text-4xl sm:text-6xl">
+              Paixão pelo sabor em cada detalhe.
+            </Heading>
+            <div className="space-y-4 text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p>
+                O **Abell's Gastroburger** nasceu de um desejo simples: elevar o conceito de hambúrguer artesanal a uma experiência gastronômica completa. 
+              </p>
+              <p>
+                Localizados no coração de Flecheiras, unimos a tradição dos melhores blends de carne com o toque regional que só a nossa terra tem. Cada lanche que sai da nossa cozinha carrega não apenas ingredientes frescos, mas a nossa alma e o compromisso de fazer você sorrir a cada mordida.
+              </p>
+              <p className="font-bold text-amber-600 dark:text-amber-500 italic">
+                "Não é apenas comida, é o momento mais gostoso do seu dia."
+              </p>
+            </div>
+            <div className="pt-4">
+              <Button href="#cardapio" className="px-8 py-4 text-lg">
+                Conheça nosso Cardápio
+              </Button>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </div>
+  )
+}
+
+const burgers = [
+  { img: '/burger-classic.png', name: 'Tradicional', price: 'R$ 25,00', description: 'Burger 150g, alface, muçarela, tomate e molho barbecue.' },
+  { img: '/burger-cupimbell.png', name: 'Cupimbell', price: 'R$ 35,00', description: 'Cupim desfiado 150g, alface, tomate, muçarela e molho barbecue da casa.' },
+  { img: '/burger-classic.png', name: 'Classic', price: 'R$ 30,00', description: 'Burger 150g, cheddar cremoso, alface, tomate e cebola caramelizada.' },
+  { img: '/burger-nordestino.png', name: 'Nordestino', price: 'R$ 40,00', description: 'Carne de sol, queijo coalho, alface, tomate, cebola caramelizada e molho de rapadura.' },
+  { img: '/burger-insano.png', name: 'Insano', price: 'R$ 45,00', description: '02 Burgers 150g, muçarela, bacon, molho especial picante, cheddar cremoso, alface e tomate.' },
+  { img: '/burger-classic.png', name: 'Hot', price: 'R$ 30,00', description: 'Burger 150g, molho especial picante, muçarela, alface e tomate.' },
+]
+
+const smashes = [
+  { img: '/burger-smash.png', name: 'Smash Kids', price: 'R$ 17,00', description: 'Pão brioche, 1 smash 80g e cheddar cremoso.' },
+  { img: '/burger-smash.png', name: 'Combo 01', price: 'R$ 25,00', description: 'Pão brioche, sh 80g, cheddar cremoso + batata + refrigerante 350ml.' },
+  { img: '/burger-smash.png', name: 'Combo 02', price: 'R$ 32,00', description: '2 Pão brioche, ash 80g, cheddar cremoso + refrigerante 350ml.' },
+  { img: '/burger-smash.png', name: 'Combo 03', price: 'R$ 37,00', description: '2 Pão brioche, ash 80g, cheddar cremoso + batata + refrigerante 350ml.' },
+  { img: '/burger-smash.png', name: 'Combo 04', price: 'R$ 37,00', description: '2 Pão brioche, 2 cupim de, muçarela e molho barbecue + batata + refrigerante 350ml.' },
+  { img: '/burger-smash-super.png', name: 'Super Smash', price: 'R$ 42,00', description: 'Triplo smash, cheddar triplo e bacon crocante.' },
+]
+
+const hotdogs = [
+  { img: '/dog-lampiao.png', name: 'Tradicional', price: 'R$ 30,00', description: 'Linguiça artesanal 300g, molho de tomate, ervilha, milho, batata palha.' },
+  { img: '/dog-especial.png', name: 'Especial', price: 'R$ 35,00', description: 'Linguiça artesanal 300g, farofa de bacon e molho especial.' },
+  { img: '/dog-lampiao.png', name: 'Dog Lampião', price: 'R$ 35,00', description: 'Carne de sol, cheddar, batata palha e cebola caramelizada.' },
+  { img: '/dog-lampiao.png', name: 'Dog Pork', price: 'R$ 35,00', description: 'Costelinha de porco, muçarela, molho barbecue e milho.' },
+  { img: '/dog-especial.png', name: 'Dog Bacon', price: 'R$ 38,00', description: 'Dose extra de bacon crocante e queijo derretido.' },
+  { img: '/dog-lampiao.png', name: 'Dog Cheddar', price: 'R$ 36,00', description: 'Muito cheddar cremoso e batata palha.' },
+]
+
+const pizzas = [
+  { img: '/pizza-calabresa.png', name: 'Calabresa', price: 'G: R$ 60,00', description: 'Muçarela, calabresa e cebola.' },
+  { img: '/pizza-portuguesa.png', name: 'Portuguesa', price: 'G: R$ 50,00', description: 'Muçarela, presunto, ervilha, ovo, cebola e pimentão.' },
+  { img: '/pizza-nordestina.png', name: 'Nordestina', price: 'G: R$ 80,00', description: 'Muçarela, carne do sol puxada na manteiga da terra, queijo coalho em cubo e cebola.' },
+  { img: '/pizza-calabresa.png', name: 'Carne do Sol', price: 'G: R$ 80,00', description: 'Muçarela, carne do sol e cream cheese.' },
+  { img: '/pizza-portuguesa.png', name: 'Cupim', price: 'G: R$ 80,00', description: 'Muçarela, cupim defumado e desfiado.' },
+  { img: '/pizza-calabresa.png', name: 'Pepperoni', price: 'G: R$ 80,00', description: 'Muçarela e pepperoni selecionado.' },
+]
+
+const desserts = [
+  { img: '/milkshake.png', name: 'Milkshake Gourmet', price: 'R$ 18,00', description: 'Milkshake cremoso 400ml com diversos sabores.' },
+  { img: '/milkshake.png', name: 'Caipirinha', price: 'R$ 18,00', description: 'A clássica brasileira com cachaça de qualidade.' },
+  { img: '/milkshake.png', name: 'Caipifruta', price: 'R$ 24,00', description: 'Mix de frutas frescas e destilado premium.' },
+  { img: '/milkshake.png', name: 'Sucos Naturais', price: 'R$ 10,00', description: 'Frutas da estação preparadas na hora.' },
+  { img: '/milkshake.png', name: 'Refrigerante', price: 'R$ 6,00', description: 'Diversas opções de refrigerantes 400ml.' },
+  { img: '/milkshake.png', name: 'Sobremesa do Dia', price: 'R$ 15,00', description: 'Consulte as opções doces disponíveis.' },
+]
 
 export default function Home() {
+  const [selectedProduct, setSelectedProduct] = useState<MenuItem | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
+  const handleOpenDrawer = (product: MenuItem) => {
+    setSelectedProduct(product)
+    setDrawerOpen(true)
+  }
+
   return (
-    <div className="overflow-hidden">
+    <div className="transition-colors duration-300">
       <Hero />
-      <main>
-        <Container className="mt-10">
-          <LogoCloud />
-        </Container>
-        <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
-          <FeatureSection />
-          <BentoSection />
-        </div>
-        <DarkBentoSection />
-      </main>
-      <Testimonials />
+      
+      <div className="bg-white dark:bg-gray-950 rounded-[2.5rem] sm:rounded-[3.5rem] -my-12 relative z-10 shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
+        <main>
+          <Container>
+            <div id="cardapio" className="pt-20">
+              <MenuCarousel id="burgers" subheading="Cardápio" title="Hambúrgueres Artesanais" items={burgers} onProductClick={handleOpenDrawer} />
+              <MenuCarousel id="smashes" subheading="Cardápio" title="Smashes & Combos" items={smashes} onProductClick={handleOpenDrawer} />
+              <MenuCarousel id="hotdogs" subheading="Cardápio" title="Hot-Dogs Gourmet" items={hotdogs} onProductClick={handleOpenDrawer} />
+              <MenuCarousel id="pizzas" subheading="Cardápio" title="Pizzas Especiais" items={pizzas} onProductClick={handleOpenDrawer} />
+              <MenuCarousel id="sobremesas" subheading="Cardápio" title="Sobremesas & Bebidas" items={desserts} onProductClick={handleOpenDrawer} />
+            </div>
+          </Container>
+        </main>
+        
+        <Testimonials />
+        <AboutSection />
+        <ContactAndAddressSection />
+      </div>
+
       <Footer />
+      <ProductDrawer open={drawerOpen} setOpen={setDrawerOpen} product={selectedProduct} />
     </div>
   )
 }

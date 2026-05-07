@@ -95,7 +95,6 @@ function CardapioContent() {
           <div className="flex flex-col items-center gap-12 pt-16 pb-24 lg:flex-row lg:items-center lg:py-24">
             <div className="relative flex-1 flex justify-center">
               <div className="relative size-80 sm:size-96 lg:size-[450px] shrink-0">
-                <div className="absolute inset-0 rounded-full bg-amber-400/20 blur-3xl" />
                 <motion.img
                   initial={{ scale: 0.8, opacity: 0, rotate: -10 }}
                   animate={{ scale: 1, opacity: 1, rotate: 0 }}
@@ -107,10 +106,10 @@ function CardapioContent() {
               </div>
             </div>
             <div className="flex-1 text-center lg:text-left">
-              <h1 className="font-display text-5xl/[1.1] font-medium tracking-tight text-balance text-gray-950 dark:text-white sm:text-7xl/[1.05]">
-                <span className="text-orange-600">Cardápio</span> <span className="text-white">Completo</span>.
+              <h1 className="font-display text-6xl/[1] font-medium tracking-tight text-balance text-white sm:text-8xl/[0.9]">
+                <span className="text-red-600 inline-block pb-1">Cardápio</span> <span className="text-amber-500">Completo</span>.
               </h1>
-              <p className="mt-6 max-w-lg text-lg/7 font-medium text-gray-950 dark:text-gray-500 sm:text-xl/8 mx-auto lg:mx-0">
+              <p className="mt-6 max-w-lg text-lg/7 font-medium text-gray-200 sm:text-xl/8 mx-auto lg:mx-0">
                 Explore nossa variedade de burgers artesanais, pizzas e sobremesas. Tudo preparado com ingredientes selecionados.
               </p>
             </div>
@@ -118,12 +117,12 @@ function CardapioContent() {
         </Container>
       </div>
       
-      <div ref={menuRef} className="bg-white dark:bg-gray-950 rounded-[2.5rem] sm:rounded-[3.5rem] -my-12 relative z-10 shadow-2xl ring-1 ring-black/5 dark:border-white/10">
+      <div ref={menuRef} className="bg-black/40 backdrop-blur-xl rounded-[2.5rem] sm:rounded-[3.5rem] mt-12 mb-12 mx-2 sm:mx-4 relative z-10 shadow-2xl ring-1 ring-white/10 border-t border-white/10">
         <main className="pt-24 pb-32">
           <Container>
             {/* Categorias - Floating Desktop (Hidden on Mobile) */}
             <div className="hidden md:flex sticky top-8 z-50 justify-center mb-12 pointer-events-none">
-              <div className="flex overflow-x-auto gap-2 no-scrollbar p-2 bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-full shadow-2xl border border-black/5 dark:border-white/10 ring-1 ring-black/5 pointer-events-auto">
+              <div className="flex overflow-x-auto gap-2 no-scrollbar p-2 bg-black/50 backdrop-blur-xl rounded-full shadow-2xl border border-white/10 ring-1 ring-black/5 pointer-events-auto">
                 {categories.map((cat) => (
                   <Link
                     key={cat.id}
@@ -133,7 +132,7 @@ function CardapioContent() {
                     className={`px-6 py-2 rounded-full text-sm font-bold transition-all whitespace-nowrap ${
                       activeCategory === cat.id 
                       ? 'bg-amber-500 text-black shadow-lg scale-105' 
-                      : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
+                      : 'bg-white/10 text-gray-300 hover:bg-white/20'
                     }`}
                   >
                     {cat.label}
@@ -157,7 +156,7 @@ function CardapioContent() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.05 }}
-                    className="group relative bg-gray-50 dark:bg-gray-900 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-black/5 dark:border-white/5"
+                    className="group relative bg-black/40 backdrop-blur-md rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-white/10"
                   >
                     <div className="aspect-square overflow-hidden">
                       <img 
@@ -170,8 +169,8 @@ function CardapioContent() {
                       </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-2xl font-bold dark:text-white mb-2">{item.name}</h3>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-2 mb-6 h-10">
+                      <h3 className="text-2xl font-bold text-white mb-2">{item.name}</h3>
+                      <p className="text-gray-300 text-sm line-clamp-2 mb-6 h-10">
                         {item.description}
                       </p>
                       <button

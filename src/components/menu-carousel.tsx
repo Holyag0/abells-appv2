@@ -77,7 +77,7 @@ export function MenuCard({
       ref={setElement}
       style={{ opacity }}
       {...props}
-      className="relative flex aspect-9/16 w-72 shrink-0 snap-start scroll-ml-(--scroll-padding) flex-col justify-end overflow-hidden rounded-3xl sm:aspect-3/4 sm:w-96 group"
+      className="relative flex aspect-[4/5] w-[75vw] sm:aspect-3/4 sm:w-96 shrink-0 snap-center flex-col justify-end overflow-hidden rounded-3xl group ring-1 ring-white/10"
     >
       <img
         alt={name}
@@ -145,7 +145,7 @@ export function MenuCarousel({
   }
 
   return (
-    <div id={id} className="overflow-hidden py-24 bg-white dark:bg-gray-950 transition-colors first:pt-32 last:pb-32">
+    <div id={id} className="overflow-hidden py-24 relative first:pt-32 last:pb-32 border-t border-white/5">
       <Container>
         <div ref={setReferenceWindowRef}>
           <Subheading>{subheading}</Subheading>
@@ -157,7 +157,7 @@ export function MenuCarousel({
       <div
         ref={scrollRef}
         className={clsx([
-          'mt-16 flex gap-8 px-(--scroll-padding)',
+          'mt-16 flex gap-4 sm:gap-8 px-(--scroll-padding)',
           '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
           'snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-smooth',
           '[--scroll-padding:max(--spacing(6),calc((100vw-(var(--container-2xl)))/2))] lg:[--scroll-padding:max(--spacing(8),calc((100vw-(var(--container-7xl)))/2))]',
@@ -178,7 +178,7 @@ export function MenuCarousel({
       </div>
       <Container className="mt-16">
         <div className="flex justify-between items-center">
-          <p className="max-w-sm text-sm/6 text-gray-600 dark:text-gray-400">
+          <p className="max-w-sm text-sm/6 text-gray-300">
             Arraste para ver todas as opções desta categoria.
           </p>
           <div className="hidden sm:flex sm:gap-2">
@@ -188,8 +188,8 @@ export function MenuCarousel({
                 onClick={() => scrollTo(index)}
                 data-active={activeIndex === index ? true : undefined}
                 className={clsx(
-                  'size-2.5 rounded-full border border-transparent bg-gray-300 dark:bg-gray-700 transition',
-                  'data-active:bg-amber-600 dark:data-active:bg-amber-500 data-hover:bg-gray-400 dark:data-hover:bg-gray-600',
+                  'size-2.5 rounded-full border border-transparent bg-white/20 transition',
+                  'data-active:bg-amber-500 data-hover:bg-white/40',
                 )}
               />
             ))}

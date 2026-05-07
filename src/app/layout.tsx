@@ -10,8 +10,7 @@ export const metadata: Metadata = {
 }
 
 import { MobileFloatingMenu } from '@/components/mobile-floating-menu'
-
-import { Gradient } from '@/components/gradient'
+import { BackgroundSlideshow } from '@/components/background-slideshow'
 
 export default function RootLayout({
   children,
@@ -26,7 +25,7 @@ export default function RootLayout({
           href="https://api.fontshare.com/css?f%5B%5D=switzer@400,500,600,700&amp;display=swap"
         />
       </head>
-      <body className="bg-white text-gray-950 antialiased dark:bg-gray-950 dark:text-white transition-colors duration-300 min-h-screen relative">
+      <body className="antialiased text-white transition-colors duration-300 min-h-screen relative selection:bg-amber-500/30">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -34,11 +33,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="relative min-h-screen">
-            {/* O gradiente que servirá de borda */}
-            <Gradient className="fixed inset-0 z-0" />
+            <BackgroundSlideshow />
             
-            {/* O conteúdo com a margem (bordas), mas mantendo o fundo original das páginas */}
-            <div className="relative z-10 m-2 sm:m-4 min-h-[calc(100vh-1rem)] sm:min-h-[calc(100vh-2rem)]">
+            <div className="relative z-10 min-h-[calc(100vh-1rem)] sm:min-h-[calc(100vh-2rem)]">
               {children}
             </div>
           </div>

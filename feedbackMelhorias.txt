@@ -1,0 +1,27 @@
+Mapeamento de Requisitos e Melhorias - Landing Page
+
+🎨 UI & Design Visual
+* O background em degradê atual precisa ser removido, pois dificulta a leitura das fontes brancas e coloridas nas áreas mais claras[cite: 5].
+* O visual da aplicação deve ser mais enxuto ("clean"), utilizando o site do "Barnesburgo" como referência de design[cite: 8, 11, 29].
+* As cores vibrantes da interface atual não estão combinando com as cores do texto[cite: 9].
+* O fundo preto é sugerido como uma alternativa neutra para o background[cite: 10].
+* O novo background deve ser construído utilizando as fotos profissionais do catálogo/Drive do cliente[cite: 12, 13, 14, 15].
+* Deve-se aplicar um efeito de desfoque (blur) nessas imagens de fundo para não poluir a visualização[cite: 16].
+
+🔠 Tipografia & Branding
+* A tipografia precisa de hierarquia visual, com uma fonte de maior destaque para o título principal ("Abel's Gastroburguer") na primeira seção[cite: 37, 38, 39].
+* Os textos descritivos devem utilizar uma tipografia mais simples[cite: 38].
+* O cabeçalho (Header) não deve exibir o nome completo do restaurante por extenso[cite: 40].
+* Mantenha apenas a estampa/ícone da logo posicionada no lado esquerdo do cabeçalho[cite: 41].
+
+🧭 UX & Estrutura de Navegação
+* A interface de navegação atual tem itens em excesso e deve ser simplificada, mantendo apenas o cardápio digital[cite: 44].
+* A área de "Destaques" não deve ser uma página separada, mas sim uma seção integrada dentro do próprio cardápio completo[cite: 44].
+* O carrossel horizontal de destaques no mobile não está intuitivo, pois não deixa claro que é possível arrastar os itens para o lado[cite: 47].
+* Para corrigir o carrossel, as imagens devem ser menores/retangulares e devem ficar "meio exibidas" na tela, induzindo o usuário ao scroll horizontal[cite: 47, 48].
+* O fundo da seção de destaques precisa ser ajustado e as margens removidas para otimizar a visualização[cite: 48].
+
+📱 Mobile & Responsividade
+* O Header na versão mobile precisa ser uma barra fixa no topo da tela ou utilizar um botão de menu no estilo hambúrguer[cite: 45].
+* Outra alternativa sugerida para o mobile é criar uma barra com botões de navegação, transmitindo a sensação de um web app[cite: 46].
+* Se a barra de navegação estilo app for utilizada, ela deve ter um comportamento dinâmico de scroll: sumir quando o usuário rola a tela para baixo e reaparecer quando rola para cima[cite: 46].

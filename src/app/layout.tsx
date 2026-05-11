@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 import { MobileFloatingMenu } from '@/components/mobile-floating-menu'
-import { BackgroundSlideshow } from '@/components/background-slideshow'
+import { ToastContainer } from '@/components/toast'
 
 export default function RootLayout({
   children,
@@ -33,14 +33,13 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="relative min-h-screen">
-            <BackgroundSlideshow />
-            
             <div className="relative z-10 min-h-[calc(100vh-1rem)] sm:min-h-[calc(100vh-2rem)]">
               {children}
             </div>
           </div>
         </ThemeProvider>
         <MobileFloatingMenu />
+        <ToastContainer />
       </body>
     </html>
   )

@@ -3,6 +3,7 @@
 import * as Headless from '@headlessui/react'
 import { ArrowLongRightIcon } from '@heroicons/react/20/solid'
 import { clsx } from 'clsx'
+import { StarIcon } from './icons/social-icons'
 import {
   MotionValue,
   motion,
@@ -92,6 +93,11 @@ export function MenuCard({
         <div className="flex justify-between items-end">
           <div className="flex-1 min-w-0">
             <h4 className="text-2xl font-bold text-white truncate">{name}</h4>
+            <div className="flex items-center gap-1 mt-2">
+              {[...Array(5)].map((_, i) => (
+                <StarIcon key={`mstar-${i}`} className="w-4 h-4 text-amber-400" />
+              ))}
+            </div>
             <div className="mt-4">
               <button
                 onClick={(e) => {

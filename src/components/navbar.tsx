@@ -10,7 +10,6 @@ import { motion } from 'framer-motion'
 import { Link } from './link'
 import { Logo } from './logo'
 import { PlusGrid, PlusGridItem, PlusGridRow } from './plus-grid'
-import { ThemeToggle } from './theme-toggle'
 
 const links = [
   { href: '/cardapio', label: 'Cardápio Completo' },
@@ -81,7 +80,7 @@ export function Navbar({ banner }: { banner?: React.ReactNode }) {
           <div className="relative flex gap-6">
             <PlusGridItem className="py-3">
               <Link href="/" title="Home">
-                <Logo className="h-9" />
+                <Logo className="h-10 md:h-12" />
               </Link>
             </PlusGridItem>
             {banner && (

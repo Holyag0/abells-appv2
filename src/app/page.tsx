@@ -100,13 +100,14 @@ function AboutSection() {
           <div className="flex-[1.2] relative w-full max-w-lg mx-auto lg:mr-auto lg:-ml-12">
             <div className="absolute -inset-4 bg-amber-500/20 rounded-full blur-3xl" />
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 1, ease: "easeOut" }}
               className="relative aspect-[4/5] lg:aspect-square rounded-4xl overflow-hidden shadow-2xl ring-1 ring-white/10"
             >
               <img
-                src="/sobre-nos.png"
+                src="/testimonial-2.png"
                 alt="Abell's Gastroburger Passion"
                 className="size-full object-cover object-top"
               />
@@ -139,9 +140,10 @@ function AboutSection() {
           <div className="flex-[1.2] relative w-full max-w-lg mx-auto lg:ml-auto lg:-mr-12">
             <div className="absolute -inset-4 bg-amber-500/20 rounded-full blur-3xl" />
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 1, ease: "easeOut" }}
               className="relative aspect-[4/5] lg:aspect-square rounded-4xl overflow-hidden shadow-2xl ring-1 ring-white/10"
             >
               <img
@@ -178,10 +180,10 @@ function GallerySection() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
           {galleryImages.map((src, idx) => (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.05 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "0px" }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
               key={src}
               className="relative aspect-square rounded-2xl overflow-hidden ring-1 ring-white/10 group cursor-pointer"
               onClick={() => window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { index: idx } }))}
@@ -238,7 +240,9 @@ export default function Home() {
       <NavbarScroll />
       <Hero />
 
-      <div className="bg-gradient-to-b from-zinc-900/80 via-zinc-900/90 to-black/95 backdrop-blur-xl rounded-[2rem] sm:rounded-[3rem] mt-8 mb-12 mx-2 sm:mx-4 relative z-10 shadow-2xl ring-1 ring-white/10 border-t border-amber-500/20">
+      <div className="bg-zinc-950 relative z-10 border-t border-white/10 mt-8">
+        <AboutSection />
+        <GallerySection />
         <main>
           <Container>
             <div className="pt-16">
@@ -248,9 +252,6 @@ export default function Home() {
           </Container>
         </main>
         
-        {/* <Testimonials /> */}
-        <GallerySection />
-        <AboutSection />
         <ContactAndAddressSection />
       </div>
 

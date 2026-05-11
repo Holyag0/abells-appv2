@@ -134,10 +134,7 @@ function Copyright() {
 
 export function Footer() {
   return (
-    <footer className="relative mt-24">
-      <Gradient className="relative rounded-t-[2.5rem] sm:rounded-t-[3.5rem] overflow-hidden">
-        <div className="absolute inset-2 rounded-[2rem] sm:rounded-[3rem] bg-gray-950/98 backdrop-blur-sm" />
-        
+    <footer className="relative mt-24 bg-zinc-950 border-t border-white/10 rounded-t-[2.5rem] sm:rounded-t-[3.5rem]">
         <Container className="relative z-10 py-16">
           <CallToAction />
           
@@ -170,7 +167,6 @@ export function Footer() {
             </PlusGridRow>
           </PlusGrid>
         </Container>
-      </Gradient>
     </footer>
   )
 }

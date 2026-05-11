@@ -13,8 +13,7 @@ import { Logo } from './logo'
 import { InstagramIcon, WhatsAppIcon } from './icons/social-icons'
 
 const links = [
-  { href: '/#destaques', label: 'Destaques' },
-  { href: '/#cardapio', label: 'Cardápio' },
+  { href: '/#destaques', label: 'Cardápio' },
   { href: '/#galeria', label: 'Galeria' },
   { href: '/#sobre-nos', label: 'Sobre' },
   { href: '/#contato', label: 'Contato' },

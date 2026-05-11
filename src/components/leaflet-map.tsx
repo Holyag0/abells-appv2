@@ -20,6 +20,15 @@ fixLeafletIcon()
 
 export default function LeafletMap() {
   const position: [number, number] = [-3.2235, -39.2725]
+  const [map, setMap] = useState<L.Map | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (map) {
+        map.remove()
+      }
+    }
+  }, [map])
 
   return (
     <div className="size-full relative z-0 min-h-[400px]">
@@ -29,6 +38,7 @@ export default function LeafletMap() {
         scrollWheelZoom={false}
         style={{ height: '100%', width: '100%', minHeight: '400px' }}
         className="rounded-4xl z-0"
+        ref={setMap}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

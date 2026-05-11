@@ -78,41 +78,28 @@ export function MenuCard({
       ref={setElement}
       style={{ opacity }}
       {...props}
-      className="relative flex aspect-[4/5] w-[75vw] sm:aspect-3/4 sm:w-96 shrink-0 snap-center flex-col justify-end overflow-hidden rounded-3xl group ring-1 ring-white/10"
+      onClick={onProductClick}
+      className="relative flex w-36 sm:w-48 shrink-0 snap-center flex-col overflow-hidden rounded-2xl group ring-1 ring-white/10 bg-white/5 cursor-pointer hover:bg-white/10 transition-colors"
     >
-      <img
-        alt={name}
-        src={img}
-        className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-110"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 rounded-3xl bg-linear-to-t from-black/80 from-20% via-black/40 to-transparent ring-1 ring-gray-950/10 ring-inset"
-      />
-      <div className="relative p-8">
-        <div className="flex justify-between items-end">
-          <div className="flex-1 min-w-0">
-            <h4 className="text-2xl font-bold text-white truncate">{name}</h4>
-            <div className="flex items-center gap-1 mt-2">
-              {[...Array(5)].map((_, i) => (
-                <StarIcon key={`mstar-${i}`} className="w-4 h-4 text-amber-400" />
-              ))}
-            </div>
-            <div className="mt-4">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  onProductClick()
-                }}
-                className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-4 py-1.5 text-sm font-black text-black hover:bg-amber-400 transition-all active:scale-95 shadow-lg"
-              >
-                Ver Detalhes
-              </button>
-            </div>
-          </div>
-          <p className="text-xl font-black text-amber-500 whitespace-nowrap ml-4">
-            {price}
-          </p>
+      <div className="relative aspect-square w-full overflow-hidden bg-white/5">
+        <img
+          alt={name}
+          src={img}
+          className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div className="absolute bottom-2 left-2 bg-emerald-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded shadow-md">
+          -10%
+        </div>
+        <div className="absolute bottom-2 right-2 bg-amber-500 text-black p-1 rounded-full shadow-md">
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4"/></svg>
+        </div>
+      </div>
+      <div className="p-3 flex flex-col gap-1">
+        <p className="text-sm font-bold text-emerald-400">{price}</p>
+        <h4 className="text-xs font-bold text-white truncate">{name}</h4>
+        <div className="flex items-center gap-1 text-[10px] text-gray-400 mt-1">
+          <StarIcon className="w-3 h-3 text-amber-400" />
+          <span>5.0 • 30 Min</span>
         </div>
       </div>
     </motion.div>

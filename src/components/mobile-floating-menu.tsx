@@ -55,12 +55,6 @@ export function MobileFloatingMenu() {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } else {
       window.dispatchEvent(new CustomEvent('change-category', { detail: category }))
-      const section = document.getElementById('cardapio-section')
-      if (section) {
-        const offset = 80
-        const top = section.getBoundingClientRect().top + window.scrollY - offset
-        window.scrollTo({ top, behavior: 'smooth' })
-      }
     }
   }
 

@@ -5,43 +5,6 @@ import { Container } from './container'
 import { Button } from './button'
 import { StarIcon, ClockIcon, HeartIcon, ArrowDownIcon, ArrowRightIcon } from './icons/social-icons'
 
-const floatingVariants = {
-  animate: {
-    y: [0, -15, 0],
-    rotate: [-2, 2, -2],
-  },
-}
-
-function FloatingBurgers() {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <motion.div
-        variants={floatingVariants}
-        animate="animate"
-        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-20 -left-20 w-48 sm:w-64 opacity-20"
-      >
-        <img src="/burger-classic.png" alt="" className="w-full h-auto rotate-[-15deg]" />
-      </motion.div>
-      <motion.div
-        variants={floatingVariants}
-        animate="animate"
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-        className="absolute top-40 -right-16 w-40 sm:w-56 opacity-15"
-      >
-        <img src="/burger-nordestino.png" alt="" className="w-full h-auto rotate-[15deg]" />
-      </motion.div>
-      <motion.div
-        variants={floatingVariants}
-        animate="animate"
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        className="absolute bottom-20 -left-10 w-32 sm:w-48 opacity-10"
-      >
-        <img src="/dog-lampiao.png" alt="" className="w-full h-auto rotate-[20deg]" />
-      </motion.div>
-    </div>
-  )
-}
 
 import { BackgroundSlideshow } from './background-slideshow'
 
@@ -67,9 +30,8 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-16 sm:pb-24 overflow-hidden mt-2 mx-2 sm:mx-4 rounded-[2rem] sm:rounded-[3rem]">
+    <section className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-16 sm:pb-24 overflow-hidden">
       <BackgroundSlideshow />
-      <FloatingBurgers />
 
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80" />
 

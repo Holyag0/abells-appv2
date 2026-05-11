@@ -22,7 +22,7 @@ export function BackgroundSlideshow() {
   }, [])
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden bg-black rounded-[2rem] sm:rounded-[3rem] mx-2 sm:mx-4 mt-2">
+    <div className="absolute inset-0 z-0 overflow-hidden bg-black rounded-[2rem] sm:rounded-[3rem] mx-2 sm:mx-4 mt-8">
       <AnimatePresence initial={false}>
         <motion.img
           key={currentIndex}

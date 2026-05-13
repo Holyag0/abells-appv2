@@ -12,9 +12,10 @@ import { Logo } from './logo'
 import { PlusGrid, PlusGridItem, PlusGridRow } from './plus-grid'
 
 const links = [
-  { href: '/cardapio', label: 'Cardápio Completo' },
-  { href: '/#cardapio', label: 'Destaques' },
-  { href: '/#contato', label: 'Endereço' },
+  { href: '/#sobre-nos', label: 'Nossa História' },
+  { href: '/#galeria', label: 'Galeria' },
+  { href: '/#destaques', label: 'Destaques' },
+  { href: '/#cardapio', label: 'Cardápio' },
   { href: '/#contato', label: 'Contato' },
 ]
 

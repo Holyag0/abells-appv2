@@ -5,29 +5,13 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
-import { Gradient } from '@/components/gradient'
 import { Link } from '@/components/link'
 import { NavbarScroll } from '@/components/navbar-scroll'
-import { MenuCarousel } from '@/components/menu-carousel'
 import { CardapioSection } from '@/components/cardapio-section'
-import { Testimonials } from '@/components/testimonials'
 import { Heading, Subheading } from '@/components/text'
-import { ChevronRightIcon } from '@heroicons/react/16/solid'
-import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
-import type { Metadata } from 'next'
 import { InstagramIcon, WhatsAppIcon } from '@/components/icons/social-icons'
-import { MapPinIcon, PhoneIcon, LightningIcon } from '@/components/icons/contact-icons'
-
-const LeafletMap = dynamic(() => import('@/components/leaflet-map'), {
-  ssr: false,
-  loading: () => (
-    <div className="absolute inset-0 bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-      <p className="text-gray-500 italic">Carregando mapa interativo...</p>
-    </div>
-  ),
-})
-
+import { MapPinIcon, LightningIcon } from '@/components/icons/contact-icons'
 import { ProductDrawer } from '@/components/product-drawer'
 import type { MenuItem } from '@/components/menu-carousel'
 import { HeroSection } from '@/components/hero-section'
@@ -67,7 +51,7 @@ function ContactAndAddressSection() {
                 </div>
                 <div>
                   <p className="font-bold">Endereço</p>
-                  <p className="text-gray-300">R. São Pedro, 150 - Fleicheiras, Trairi - CE, 62690-000</p>
+                  <a href="https://www.google.com/maps/search/?api=1&query=Abells+Gastroburguer" target="_blank" className="text-gray-600 dark:text-gray-400 hover:text-amber-600 transition">R. São Pedro, 150 - Fleicheiras, Trairi - CE, 62690-000</a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -82,7 +66,15 @@ function ContactAndAddressSection() {
             </div>
           </div>
           <div className="relative rounded-4xl overflow-hidden shadow-2xl ring-1 ring-black/5 dark:ring-white/10 min-h-[400px]">
-             <LeafletMap />
+             <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.5200424298955!2d-39.27129568240203!3d-3.21980171766142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c1090001426fab%3A0x8e8abc432577a3f6!2sAbells%20Gastroburguer!5e0!3m2!1spt-BR!2sbr!4v1778600133872!5m2!1spt-BR!2sbr"
+              width="400"
+              height="300"
+              className="absolute inset-0 w-full h-full border-0"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </div>
       </Container>
@@ -121,7 +113,7 @@ function AboutSection() {
             </Heading>
             <div className="space-y-4 text-lg text-gray-300 leading-relaxed">
               <p>
-                O **Abell's Gastroburger** nasceu de um desejo simples: elevar o conceito de hambúrguer artesanal a uma experiência gastronômica completa. 
+                O <strong>Abell's Gastroburger</strong> nasceu de um desejo simples: elevar o conceito de hambúrguer artesanal a uma experiência gastronômica completa.
               </p>
               <p>
                 Localizados no coração de Flecheiras, unimos a tradição dos melhores blends de carne com o toque regional que só a nossa terra tem. Cada lanche que sai da nossa cozinha carrega não apenas ingredientes frescos, mas a nossa alma e o compromisso de fazer você sorrir a cada mordida.
@@ -171,13 +163,13 @@ function GallerySection() {
     '/galeria/IMG_5693.jpg',
   ]
   return (
-    <div id="galeria" className="py-32 relative border-t border-white/10 scroll-mt-24">
+    <div id="galeria" className="pt-32 pb-16 relative border-t border-white/10 scroll-mt-24">
       <Container>
         <div className="space-y-8 mb-16 text-center">
           <Subheading>Nossa Galeria</Subheading>
           <Heading as="h2" className="text-4xl sm:text-5xl">Conheça nosso espaço e pratos.</Heading>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
           {galleryImages.map((src, idx) => (
             <motion.div
               initial={{ opacity: 0 }}
@@ -245,7 +237,7 @@ export default function Home() {
         <GallerySection />
         <main>
           <Container>
-            <div className="pt-16">
+            <div className="pt-0">
               <HighlightsSection onProductClick={handleOpenDrawer} />
               <CardapioSection onProductClick={handleOpenDrawer} />
             </div>

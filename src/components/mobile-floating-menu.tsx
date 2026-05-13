@@ -32,8 +32,8 @@ const HotdogIcon = ({ className }: { className?: string }) => (
 const menuItems = [
   { id: 'home', category: 'home', icon: HomeIcon, color: 'text-amber-500' },
   { id: 'hamburgueres', category: 'hamburgueres', icon: BurgerIcon, color: 'text-orange-600' },
-  { id: 'pizzas', category: 'pizzas', icon: PizzaIcon, color: 'text-red-500' },
   { id: 'hotdogs', category: 'hotdogs', icon: HotdogIcon, color: 'text-yellow-500' },
+  { id: 'pizzas', category: 'pizzas', icon: PizzaIcon, color: 'text-red-500' },
   { id: 'bebidas', category: 'bebidas', icon: DrinkIcon, color: 'text-cyan-500' },
 ]
 
@@ -48,6 +48,32 @@ export function MobileFloatingMenu() {
     window.addEventListener('change-category', handleCategoryChange);
     return () => window.removeEventListener('change-category', handleCategoryChange);
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Verificamos de baixo para cima para encontrar a primeira categoria que passou do ponto de gatilho
+      const categoriesToCheck = ['bebidas', 'pizzas', 'hotdogs', 'hamburgueres'];
+      let foundCategory = 'home';
+      
+      const triggerPoint = window.innerHeight / 3; // Ponto de gatilho no terço superior da tela
+
+      for (const cat of categoriesToCheck) {
+        const el = document.getElementById(`category-${cat}`);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= triggerPoint) {
+            foundCategory = cat;
+            break;
+          }
+        }
+      }
+
+      setActiveItem(foundCategory);
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const handleItemClick = (category: string) => {
     setActiveItem(category)

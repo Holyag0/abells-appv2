@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { Container } from './container'
 import { Button } from './button'
-import { StarIcon, ClockIcon, HeartIcon, ArrowDownIcon, ArrowRightIcon } from './icons/social-icons'
+import { StarIcon, ClockIcon, HeartIcon, ArrowDownIcon, ArrowRightIcon, WhatsAppIcon } from './icons/social-icons'
 
 
 import { BackgroundSlideshow } from './background-slideshow'
@@ -78,20 +78,23 @@ export function HeroSection() {
           >
             <Button
               href="#destaques"
-              className="px-8 py-4 text-base sm:text-lg font-semibold bg-amber-500 text-black hover:bg-amber-400 shadow-lg shadow-amber-500/30 hover:shadow-amber-500/50 transition-all duration-300 group"
+              className="px-8 py-4 text-base sm:text-lg font-semibold bg-red-600 text-white hover:bg-red-500 shadow-lg shadow-red-600/30 hover:shadow-red-600/50 transition-all duration-300 group"
             >
               <span className="flex items-center gap-2">
-                Ver Destaques
-                <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                Cardápio Completo
+                <ArrowDownIcon className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
               </span>
             </Button>
-            <Button
-              href="#cardapio"
-              variant="secondary"
-              className="px-8 py-4 text-base sm:text-lg font-semibold border-2 border-white/30 hover:border-amber-500 hover:text-amber-500 bg-white/5 hover:bg-white/10 backdrop-blur-sm transition-all duration-300"
+            <a
+              href="https://wa.me/5585985497108"
+              target="_blank"
+              className="inline-flex justify-center px-8 py-4 rounded-full text-base sm:text-lg font-semibold border-2 border-green-500 text-green-400 bg-green-500/10 backdrop-blur-sm transition-all duration-300 group"
             >
-              Cardápio Completo
-            </Button>
+              <span className="flex items-center gap-2">
+                Fale Conosco
+                <WhatsAppIcon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              </span>
+            </a>
           </motion.div>
 
           <motion.div

@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import * as Headless from '@headlessui/react'
 import { ArrowLongRightIcon } from '@heroicons/react/20/solid'
 import { clsx } from 'clsx'
@@ -122,7 +123,15 @@ export function MenuCarousel({
   let scrollRef = useRef<HTMLDivElement | null>(null)
   let { scrollX } = useScroll({ container: scrollRef })
   let [setReferenceWindowRef, bounds] = useMeasure()
-  let [activeIndex, setActiveIndex] = useState(0)
+  let [activeIndex, setActiveIndex] = useState(1)
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      let gap = 32
+      let width = (scrollRef.current.children[0] as HTMLElement).offsetWidth
+      scrollRef.current.scrollTo({ left: (width + gap) * 1, behavior: 'auto' })
+    }
+  }, [])
 
   useMotionValueEvent(scrollX, 'change', (x) => {
     if (!scrollRef.current || scrollRef.current.children.length === 0) return
@@ -169,12 +178,9 @@ export function MenuCarousel({
         ))}
         <div className="w-2xl shrink-0 sm:w-216" />
       </div>
-      <Container className="mt-16">
-        <div className="flex justify-between items-center">
-          <p className="max-w-sm text-sm/6 text-gray-300">
-            Arraste para ver todas as opções desta categoria.
-          </p>
-          <div className="hidden sm:flex sm:gap-2">
+      <Container className="mt-8 hidden sm:block">
+        <div className="flex justify-end items-center">
+          <div className="flex gap-2">
             {items.map((_, index) => (
               <Headless.Button
                 key={index}

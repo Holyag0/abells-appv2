@@ -23,14 +23,14 @@ import { clsx } from 'clsx'
 
 export function HighlightsSection({ onProductClick }: HighlightsSectionProps) {
   return (
-    <section id="destaques" className="relative py-16 sm:py-24 scroll-mt-24">
+    <section id="destaques" className="relative  scroll-mt-24">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center lg:mb-12"
         >
           <motion.span
             initial={{ opacity: 0, scale: 0.8 }}
@@ -48,7 +48,7 @@ export function HighlightsSection({ onProductClick }: HighlightsSectionProps) {
         </motion.div>
       </Container>
 
-      <div className="block lg:hidden">
+      <div className="block lg:hidden gap-2">
         <MenuCarousel
           id="destaques-carousel"
           subheading=""
@@ -96,7 +96,7 @@ export function HighlightsSection({ onProductClick }: HighlightsSectionProps) {
         </div>
       </Container>
 
-      <Container className="mt-12 text-center">
+      <Container className="mt-6 sm:mt-12 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

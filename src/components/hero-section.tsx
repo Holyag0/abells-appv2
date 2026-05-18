@@ -77,7 +77,7 @@ export function HeroSection() {
             className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Button
-              href="#destaques"
+              href="#cardapio"
               className="px-8 py-4 text-base sm:text-lg font-semibold bg-red-600 text-white hover:bg-red-500 shadow-lg shadow-red-600/30 hover:shadow-red-600/50 transition-all duration-300 group"
             >
               <span className="flex items-center gap-2">

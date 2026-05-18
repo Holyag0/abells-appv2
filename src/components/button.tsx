@@ -22,6 +22,11 @@ const variants = {
     'text-sm font-medium whitespace-nowrap text-gray-950',
     'data-disabled:bg-transparent data-disabled:opacity-40 data-hover:bg-gray-50',
   ),
+  whatsapp: clsx(
+    'inline-flex items-center justify-center px-5 py-[calc(--spacing(2)-1px)]',
+    'rounded-full border-2 border-green-500 bg-green-500/10 text-green-400 backdrop-blur-sm shadow-md',
+    'text-base font-semibold whitespace-nowrap transition-all duration-300 hover:bg-green-500/20 active:scale-95',
+  ),
 }
 
 type ButtonProps = {

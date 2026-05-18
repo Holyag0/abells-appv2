@@ -13,9 +13,10 @@ import { Logo } from './logo'
 import { InstagramIcon, WhatsAppIcon } from './icons/social-icons'
 
 const links = [
-  { href: '/#sobre-nos', label: 'Sobre' },
+  { href: '/#sobre-nos', label: 'Nossa História' },
   { href: '/#galeria', label: 'Galeria' },
-  { href: '/#destaques', label: 'Cardápio' },
+  { href: '/#destaques', label: 'Destaques' },
+  { href: '/#cardapio', label: 'Cardápio' },
   { href: '/#contato', label: 'Contato' },
 ]
 
@@ -146,7 +147,7 @@ function MobileNav({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
               className="mt-12 flex gap-4"
             >
               <a
-                href="https://instagram.com/abellsgastroburguer"
+                href="https://www.instagram.com/abells_burger/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 bg-white/10 rounded-full text-white hover:bg-amber-500 hover:text-black transition-all duration-300"

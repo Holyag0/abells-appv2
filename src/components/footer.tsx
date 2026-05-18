@@ -20,8 +20,14 @@ function CallToAction() {
       <p className="mx-auto mt-6 max-w-xs text-sm/6 text-gray-500 dark:text-gray-400">
         O melhor blend, o pão mais macio e aquele molho especial que só a gente tem.
       </p>
-      <div className="mt-6">
-        <Button className="w-full sm:w-auto" href="https://wa.me/5585985497108" target="_blank">
+      <div className="mt-6 flex justify-center">
+        <Button
+          variant="whatsapp"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4"
+          href="https://wa.me/5585985497108"
+          target="_blank"
+        >
+          <SocialIconWhatsApp className="w-5 h-5 text-white" />
           Pedir no WhatsApp
         </Button>
       </div>

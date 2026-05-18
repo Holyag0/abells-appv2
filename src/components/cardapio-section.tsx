@@ -81,7 +81,7 @@ export function CardapioSection({ onProductClick }: { onProductClick: (product: 
   }
 
   return (
-    <div id="cardapio-section" className="scroll-mt-24 w-full">
+    <div id="cardapio" className="scroll-mt-24 w-full">
       <div className="flex flex-col mb-8 mt-4 pt-4 pb-2 mx-[-1rem] px-[1rem] sm:mx-0 sm:px-0">
         <h2 className="text-4xl font-bold text-center mb-8 text-white hidden sm:block">Nosso <span className="text-amber-500">Cardápio</span></h2>
       </div>

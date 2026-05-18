@@ -3,6 +3,7 @@
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import type { MenuItem } from './menu-carousel'
+import { WhatsAppIcon } from './icons/social-icons'
 
 interface ProductDrawerProps {
   open: boolean
@@ -75,8 +76,9 @@ export function ProductDrawer({ open, setOpen, product }: ProductDrawerProps) {
                             const message = `Olá! Gostaria de pedir o ${product.name} (${product.price}).`
                             window.open(`https://wa.me/5585985497108?text=${encodeURIComponent(message)}`, '_blank')
                           }}
-                          className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95"
+                          className="w-full border-2 border-green-500 text-green-600 dark:text-green-400 bg-green-500/10 hover:bg-green-500/20 font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2"
                         >
+                          <WhatsAppIcon className="w-5 h-5" />
                           Pedir Agora no WhatsApp
                         </button>
                       </div>

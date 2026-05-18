@@ -33,7 +33,7 @@ function ContactAndAddressSection() {
                 </div>
                 <div>
                   <p className="font-bold">Instagram</p>
-                  <a href="https://instagram.com/abellsgastroburguer" target="_blank" className="text-gray-600 dark:text-gray-400 hover:text-amber-600 transition">@abellsgastroburguer</a>
+                  <a href="https://www.instagram.com/abells_burger/" target="_blank" className="text-gray-600 dark:text-gray-400 hover:text-amber-600 transition">@abells_burger</a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -219,7 +219,42 @@ export default function Home() {
       setLightboxOpen(true)
     }
     window.addEventListener('open-lightbox', handleOpenLightbox)
-    return () => window.removeEventListener('open-lightbox', handleOpenLightbox)
+
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      const anchor = target.closest('a')
+      if (!anchor) return
+
+      const href = anchor.getAttribute('href')
+      if (!href) return
+
+      if (href.startsWith('#') || href.startsWith('/#')) {
+        const id = href.replace('/#', '').replace('#', '')
+        const element = document.getElementById(id)
+        if (element) {
+          e.preventDefault()
+          const offset = 90
+          const bodyRect = document.body.getBoundingClientRect().top
+          const elementRect = element.getBoundingClientRect().top
+          const elementPosition = elementRect - bodyRect
+          const offsetPosition = elementPosition - offset
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth',
+          })
+
+          window.history.pushState(null, '', href)
+        }
+      }
+    }
+
+    document.addEventListener('click', handleAnchorClick)
+
+    return () => {
+      window.removeEventListener('open-lightbox', handleOpenLightbox)
+      document.removeEventListener('click', handleAnchorClick)
+    }
   }, [])
 
   const handleOpenDrawer = (product: MenuItem) => {

@@ -1,15 +1,26 @@
 import '@/styles/tailwind.css'
 import type { Metadata } from 'next'
 import { ThemeProvider } from '@/components/theme-provider'
+import { Inter, Plus_Jakarta_Sans } from 'next/font/google'
+
+const inter = Inter({
+  variable: '--font-inter',
+  subsets: ['latin'],
+})
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: '--font-plus-jakarta-sans',
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - Abell\'s Gastroburger',
-    default: 'Abell\'s Gastroburger - O Melhor de Flecheiras',
+    template: '%s - Dr. Brasil',
+    default: 'Dr. Brasil - Clínica Médica e Odontológica em Apuiarés-CE',
   },
+  description: 'Clínica Médica e Odontológica Dr. Brasil. Atendimento humanizado e multidisciplinar de alta qualidade no centro de Apuiarés - CE.',
 }
 
-import { MobileFloatingMenu } from '@/components/mobile-floating-menu'
 import { ToastContainer } from '@/components/toast'
 
 export default function RootLayout({
@@ -18,14 +29,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://api.fontshare.com/css?f%5B%5D=switzer@400,500,600,700&amp;display=swap"
-        />
-      </head>
-      <body className="antialiased text-white transition-colors duration-300 min-h-screen relative selection:bg-amber-500/30">
+    <html lang="pt-BR" suppressHydrationWarning className={`${inter.variable} ${plusJakartaSans.variable}`}>
+      <body className="antialiased text-zinc-955 bg-amber-400 min-h-screen relative selection:bg-primary/20">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -38,7 +43,6 @@ export default function RootLayout({
             </div>
           </div>
         </ThemeProvider>
-        <MobileFloatingMenu />
         <ToastContainer />
       </body>
     </html>

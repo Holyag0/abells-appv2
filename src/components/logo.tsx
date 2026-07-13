@@ -8,11 +8,12 @@ export function Logo({ className }: { className?: string }) {
     <motion.div
       initial="idle"
       whileHover="active"
+      className="inline-block bg-white px-3 py-1 rounded-xl shadow-md border border-accent/20"
     >
       <img
-        src="/logo-gastro.png"
-        alt="Abell's Gastroburger"
-        className={clsx(className, 'object-contain')}
+        src="/images/logo.jpg"
+        alt="Dr. Brasil"
+        className={clsx(className, 'object-contain h-8 md:h-9 w-auto')}
       />
     </motion.div>
   )
@@ -20,6 +21,8 @@ export function Logo({ className }: { className?: string }) {
 
 export function Mark({ className }: { className?: string }) {
   return (
-    <img src="/logo-gastro.png" alt="" className={className} />
+    <div className="inline-block bg-white p-1 rounded-lg">
+      <img src="/images/logo.jpg" alt="Dr. Brasil" className={clsx(className, 'object-contain')} />
+    </div>
   )
 }

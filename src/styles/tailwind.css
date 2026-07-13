@@ -1,9 +1,37 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: Switzer, system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-plus-jakarta-sans), system-ui, sans-serif;
 
   --radius-4xl: 2rem;
+
+  --color-primary: #18823C;
+  --color-primary-dark: #11632d;
+  --color-primary-light: #22a04e;
+
+  --color-accent: #F5C12E;
+  --color-accent-dark: #dfae22;
+  --color-accent-light: #f7cd55;
+
+  /* Color mappings to translate restaurant colors (amber/red) directly into Dr. Brasil (yellow/green) */
+  --color-amber-50: #fffbeb;
+  --color-amber-100: #fef3c7;
+  --color-amber-200: #fde68a;
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #f7cd55;
+  --color-amber-500: #F5C12E;
+  --color-amber-600: #dfae22;
+  --color-amber-700: #b45309;
+  
+  --color-red-50: #f0fdf4;
+  --color-red-100: #dcfce7;
+  --color-red-200: #bbf7d0;
+  --color-red-300: #86efac;
+  --color-red-400: #4ade80;
+  --color-red-500: #18823C;
+  --color-red-600: #11632d;
+  --color-red-700: #15803d;
 }
 
 @keyframes move-x {
@@ -13,4 +41,42 @@
   100% {
     transform: translateX(var(--move-x-to));
   }
+}
+
+/* Global Font Face Application */
+body {
+  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-plus-jakarta-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Custom shadows for better text readability on light gradient */
+.text-shadow-light-glow {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+.text-shadow-yellow-glow {
+  text-shadow: 0 0 20px rgba(245, 193, 46, 0.35);
+}
+
+/* Infinite Smooth Auto-Scrolling Marquee */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }

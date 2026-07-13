@@ -1,58 +1,49 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import type { MenuItem } from './menu-carousel'
 
-const menuData = {
-  hamburgueres: [
-    { name: 'Tradicional', price: 'R$ 25,00', description: 'Burger 150g, alface, muçarela, tomate e molho barbecue.', img: '/burger-classic.png' },
-    { name: 'Cupimbell', price: 'R$ 35,00', description: 'Cupim desfiado 150g, alface, tomate, muçarela e molho barbecue da casa.', img: '/burger-cupimbell.png' },
-    { name: 'Classic', price: 'R$ 30,00', description: 'Burger 150g, cheddar cremoso, alface, tomate e cebola caramelizada.', img: '/burger-classic.png' },
-    { name: 'Nordestino', price: 'R$ 40,00', description: 'Carne de sol, queijo coalho, alface, tomate, cebola caramelizada e molho de rapadura.', img: '/burger-nordestino.png' },
-    { name: 'Insano', price: 'R$ 45,00', description: '02 Burgers 150g, muçarela, bacon, molho especial picante, cheddar cremoso, alface e tomate.', img: '/burger-insano.png' },
-    { name: 'Hot', price: 'R$ 30,00', description: 'Burger 150g, molho especial picante, muçarela, alface e tomate.', img: '/burger-classic.png' },
+const servicesData = {
+  consultas: [
+    { name: 'Clínico Geral', price: 'Consulta Médica', description: 'Atendimento preventivo primário para toda a família e encaminhamentos especializados.', img: '/images/recepcao.png' },
+    { name: 'Cardiologia', price: 'Consulta Médica', description: 'Eletrocardiograma digital, avaliação pré-operatória e acompanhamento da saúde do coração.', img: '/images/recepcao-natal.png' },
+    { name: 'Neurologia', price: 'Consulta Médica', description: 'Diagnósticos e tratamento de cefaleias, tremores, epilepsia e distúrbios neurológicos.', img: '/images/ambiente-corredor.png' },
+    { name: 'Ginecologia', price: 'Consulta Médica', description: 'Saúde integral da mulher, exames preventivos periódicos e acompanhamento ginecológico.', img: '/images/recepcao-frontal.png' },
+    { name: 'Geriatria', price: 'Consulta Médica', description: 'Abordagem médica voltada para o envelhecimento ativo com alta qualidade de vida.', img: '/images/ceos.jpg' },
+    { name: 'Dermatologia', price: 'Consulta Médica', description: 'Tratamento de acne, manchas, doenças dermatológicas em pele, cabelos e unhas.', img: '/images/recepcao-natal.png' },
+    { name: 'Psiquiatria', price: 'Consulta Médica', description: 'Acompanhamento médico especializado em ansiedade, depressão e transtornos de humor.', img: '/images/recepcao.png' },
   ],
-  smashes: [
-    { name: 'Smash Kids', price: 'R$ 17,00', description: 'Pão brioche, 1 smash 80g e cheddar cremoso.', img: '/burger-smash.png' },
-    { name: 'Combo 01', price: 'R$ 25,00', description: 'Pão brioche, sh 80g, cheddar cremoso + batata + refrigerante 350ml.', img: '/burger-smash.png' },
-    { name: 'Combo 02', price: 'R$ 32,00', description: '2 Pão brioche, ash 80g, cheddar cremoso + refrigerante 350ml.', img: '/burger-smash.png' },
-    { name: 'Combo 03', price: 'R$ 37,00', description: '2 Pão brioche, ash 80g, cheddar cremoso + batata + refrigerante 350ml.', img: '/burger-smash.png' },
-    { name: 'Combo 04', price: 'R$ 37,00', description: '2 Pão brioche, 2 cupim de, muçarela e molho barbecue + batata + refrigerante 350ml.', img: '/burger-smash.png' },
+  odontologia: [
+    { name: 'Clínica Geral & Limpeza', price: 'Serviço Odontológico', description: 'Avaliação preventiva, remoção de tártaro e polimento profilático para a saúde bucal.', img: '/images/recepcao.png' },
+    { name: 'Restaurações Estéticas', price: 'Serviço Odontológico', description: 'Reconstrução funcional e estética de dentes com resinas fotopolimerizáveis modernas.', img: '/images/recepcao-frontal.png' },
+    { name: 'Clareamento Dental', price: 'Serviço Odontológico', description: 'Clareamento dental a laser de alta eficiência para um sorriso rejuvenescido e brilhante.', img: '/images/recepcao-natal.png' },
+    { name: 'Próteses Dentárias', price: 'Serviço Odontológico', description: 'Soluções de reabilitação oral com próteses fixas e móveis de alta qualidade e durabilidade.', img: '/images/fachada.jpg' },
+    { name: 'Tratamento de Canal', price: 'Serviço Odontológico', description: 'Tratamento endodôntico especializado para alívio imediato da dor e salvamento dentário.', img: '/images/ambiente-corredor.png' },
   ],
-  hotdogs: [
-    { name: 'Tradicional', price: 'R$ 30,00', description: 'Linguiça artesanal 300g, molho de tomate, ervilha, milho, batata palha, maionese, catchup e mostarda.', img: '/dog-lampiao.png' },
-    { name: 'Especial', price: 'R$ 35,00', description: 'Linguiça artesanal 300g, molho de tomate, ervilha, milho, batata palha, maionese, catchup e mostarda e farofa de bacon.', img: '/dog-especial.png' },
-    { name: 'Dog Lampião', price: 'R$ 35,00', description: 'Carne de sol, cheddar, batata palha e cebola caramelizado.', img: '/dog-lampiao.png' },
-    { name: 'Dog Pork', price: 'R$ 35,00', description: 'Costelinha de porco, muçarela, molho barbecue, molho de tomate, milho, ervilha, batata palha, maionese e catchup.', img: '/dog-lampiao.png' },
+  estetica: [
+    { name: 'Botox Facial', price: 'Procedimento Estético', description: 'Aplicação de toxina botulínica para suavização de rugas de expressão e marcas na testa.', img: '/images/ceos.jpg' },
+    { name: 'Preenchimento Labial', price: 'Procedimento Estético', description: 'Definição de contorno e volume dos lábios com ácido hialurônico de alta pureza.', img: '/images/recepcao-natal.png' },
+    { name: 'Harmonização Facial', price: 'Procedimento Estético', description: 'Procedimentos estéticos faciais personalizados para valorizar seus traços naturais com equilíbrio.', img: '/images/recepcao.png' },
+    { name: 'Limpeza de Pele Profunda', price: 'Procedimento Estético', description: 'Remoção de impurezas, cravos e células mortas para uma pele saudável e rejuvenescida.', img: '/images/ambiente-corredor.png' },
   ],
-  pizzas: [
-    { name: 'Carne do Sol', price: 'R$ 80,00', description: 'Muçarela, carne do sol e cream cheese.', img: '/pizza-nordestina.png' },
-    { name: 'Cupim', price: 'R$ 80,00', description: 'Muçarela, cupim defumado e desfiado.', img: '/pizza-portuguesa.png' },
-    { name: 'Pepperoni', price: 'R$ 80,00', description: 'Muçarela e pepperoni selecionado.', img: '/pizza-calabresa.png' },
-    { name: 'Portuguesa', price: 'R$ 50,00', description: 'Muçarela, presunto, ervilha, ovo, cebola e pimentão.', img: '/pizza-portuguesa.png' },
-    { name: 'Calabresa', price: 'R$ 60,00', description: 'Muçarela, calabresa e cebola.', img: '/pizza-calabresa.png' },
-    { name: 'Marguerita', price: 'R$ 50,00', description: 'Muçarela, tomate e manjericão.', img: '/pizza-calabresa.png' },
-  ],
-  bebidas: [
-    { name: 'Milkshake Gourmet', price: 'R$ 18,00', description: 'Milkshake cremoso 400ml com diversos sabores.', img: '/milkshake.png' },
-    { name: 'Caipirinha', price: 'R$ 18,00', description: 'A clássica brasileira com cachaça de qualidade.', img: '/caipirinha.png' },
-    { name: 'Caipifruta', price: 'R$ 24,00', description: 'Mix de frutas frescas e destilado premium.', img: '/caipifruta.png' },
-    { name: 'Refrigerante', price: 'R$ 6,00', description: 'Diversas opções de refrigerantes 400ml.', img: '/refrigerante.png' },
+  exames: [
+    { name: 'Ultrassonografia Geral', price: 'Exame de Imagem', description: 'Exames de ultrassom de abdômen, vias urinárias, tireoide, obstétrico e tecidos moles.', img: '/images/fachada.jpg' },
+    { name: 'Eletrocardiograma (ECG)', price: 'Exame de Diagnóstico', description: 'Registro digital da atividade elétrica do coração para diagnósticos cardiológicos rápidos.', img: '/images/recepcao-natal.png' },
+    { name: 'Coletas Laboratoriais', price: 'Exame de Laboratório', description: 'Exames de sangue, urina e preventivos com coleta rápida e segura a partir das 7h da manhã.', img: '/images/recepcao.png' },
   ]
 }
 
 const categories = [
-  { id: 'hamburgueres', label: 'Hambúrgueres' },
-  { id: 'smashes', label: 'Smashes' },
-  { id: 'hotdogs', label: 'Hot-Dogs' },
-  { id: 'pizzas', label: 'Pizzas' },
-  { id: 'bebidas', label: 'Bebidas' },
+  { id: 'consultas', label: 'Consultas Médicas' },
+  { id: 'odontologia', label: 'Odontologia' },
+  { id: 'estetica', label: 'Estética & Botox' },
+  { id: 'exames', label: 'Exames & Diagnósticos' },
 ]
 
 export function CardapioSection({ onProductClick }: { onProductClick: (product: MenuItem) => void }) {
-  const [activeCategory, setActiveCategory] = useState('hamburgueres')
+  const [activeCategory, setActiveCategory] = useState('consultas')
 
   useEffect(() => {
     const handleCategoryChange = (e: Event) => {
@@ -75,15 +66,11 @@ export function CardapioSection({ onProductClick }: { onProductClick: (product: 
     return () => window.removeEventListener('change-category', handleCategoryChange);
   }, []);
 
-  const changeCategory = (cat: string) => {
-    setActiveCategory(cat);
-    window.dispatchEvent(new CustomEvent('change-category', { detail: cat }));
-  }
-
   return (
-    <div id="cardapio" className="scroll-mt-24 w-full">
+    <div id="servicos" className="scroll-mt-24 w-full py-16 sm:py-24">
       <div className="flex flex-col mb-8 mt-4 pt-4 pb-2 mx-[-1rem] px-[1rem] sm:mx-0 sm:px-0">
-        <h2 className="text-4xl font-bold text-center mb-8 text-white hidden sm:block">Nosso <span className="text-amber-500">Cardápio</span></h2>
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-4 text-white">Nossos <span className="text-accent">Serviços</span></h2>
+        <p className="text-gray-400 text-center max-w-xl mx-auto text-base sm:text-lg">Oferecemos uma ampla gama de exames, consultas e procedimentos odontológicos integrados no mesmo espaço físico.</p>
       </div>
 
       <div className="flex flex-col gap-16 pb-12">
@@ -97,7 +84,7 @@ export function CardapioSection({ onProductClick }: { onProductClick: (product: 
               role="list"
               className="divide-y divide-white/10 overflow-hidden bg-white/5 shadow-xl ring-1 ring-white/10 rounded-2xl lg:max-w-4xl mx-auto"
             >
-              {menuData[category.id as keyof typeof menuData].map((item, idx) => (
+              {servicesData[category.id as keyof typeof servicesData].map((item) => (
                 <motion.li 
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
@@ -108,8 +95,8 @@ export function CardapioSection({ onProductClick }: { onProductClick: (product: 
                   onClick={() => onProductClick(item as MenuItem)}
                 >
                   <div className="flex min-w-0 gap-x-4 sm:gap-x-6 w-full">
-                    <div className="relative size-20 sm:size-28 flex-none">
-                      <img alt={item.name} src={item.img} className="size-full rounded-2xl bg-white/5 object-cover ring-1 ring-white/10 group-hover:scale-105 transition-transform duration-300" />
+                    <div className="relative size-20 sm:size-24 flex-none">
+                      <img alt={item.name} src={item.img} className="size-full rounded-2xl bg-white/5 object-cover ring-1 ring-white/10 group-hover:scale-105 transition-transform duration-300 object-top" />
                       <div className="absolute -bottom-1 -right-1 flex sm:hidden items-center justify-center bg-zinc-900 rounded-full p-1">
                         <div className="size-2.5 rounded-full bg-emerald-500 animate-pulse" />
                       </div>
@@ -121,7 +108,7 @@ export function CardapioSection({ onProductClick }: { onProductClick: (product: 
                       <p className="mt-1 text-xs sm:text-sm text-gray-400 line-clamp-2 pr-2">
                         {item.description}
                       </p>
-                      <p className="mt-2 text-md sm:text-lg font-bold text-amber-500">
+                      <p className="mt-2 text-xs sm:text-sm font-semibold text-accent uppercase tracking-wider">
                         {item.price}
                       </p>
                     </div>
@@ -133,19 +120,19 @@ export function CardapioSection({ onProductClick }: { onProductClick: (product: 
                           e.stopPropagation();
                           onProductClick(item as MenuItem);
                         }}
-                        className="rounded-full bg-amber-500 px-5 py-2 text-sm font-black text-black hover:bg-amber-400 transition-all active:scale-95 shadow-lg relative z-10"
+                        className="rounded-full bg-accent px-5 py-2 text-sm font-black text-black hover:bg-accent-light transition-all active:scale-95 shadow-lg relative z-10"
                       >
-                        Ver Detalhes
+                        Saber Mais
                       </button>
                       <div className="mt-3 flex items-center gap-x-1.5 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
                         <div className="flex-none rounded-full bg-emerald-500/20 p-0.5">
                           <div className="size-2 rounded-full bg-emerald-500 animate-pulse" />
                         </div>
-                        <p className="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Disponível</p>
+                        <p className="text-[10px] font-extrabold text-emerald-450 uppercase tracking-widest">Disponível</p>
                       </div>
                     </div>
                     <div className="sm:hidden flex items-center justify-center">
-                      <ChevronRightIcon className="size-6 text-gray-500 group-hover:text-amber-500 transition-colors" />
+                      <ChevronRightIcon className="size-6 text-gray-500 group-hover:text-accent transition-colors" />
                     </div>
                   </div>
                 </motion.li>

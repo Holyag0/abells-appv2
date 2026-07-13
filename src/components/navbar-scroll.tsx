@@ -1,37 +1,31 @@
 'use client'
 
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-} from '@headlessui/react'
 import { Bars2Icon, XMarkIcon } from '@heroicons/react/24/solid'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { Link } from './link'
 import { Logo } from './logo'
-import { InstagramIcon, WhatsAppIcon } from './icons/social-icons'
+import { WhatsAppIcon } from './icons/social-icons'
 
 const links = [
-  { href: '/#sobre-nos', label: 'Nossa História' },
+  { href: '/#sobre-nos', label: 'Sobre Nós' },
   { href: '/#galeria', label: 'Galeria' },
-  { href: '/#destaques', label: 'Destaques' },
-  { href: '/#cardapio', label: 'Cardápio' },
+  { href: '/#destaques', label: 'Especialidades' },
   { href: '/#contato', label: 'Contato' },
 ]
 
 function DesktopNav() {
   return (
     <nav className="relative hidden lg:flex items-center gap-1">
-      {links.map(({ href, label }, index) => (
+      {links.map(({ href, label }) => (
         <div key={label} className="relative flex">
           <Link
             href={href}
-            className="flex items-center px-5 py-2.5 text-sm font-medium text-white/90 hover:text-amber-500 transition-all duration-300 relative group"
+            className="flex items-center px-5 py-2.5 text-sm font-extrabold text-zinc-955 hover:text-primary-dark transition-all duration-300 relative group"
           >
             {label}
             <motion.span
-              className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+              className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-dark scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
             />
           </Link>
         </div>
@@ -44,7 +38,7 @@ function MobileNavButton({ isOpen, onClick }: { isOpen: boolean; onClick: () => 
   return (
     <button
       onClick={onClick}
-      className="flex size-12 items-center justify-center rounded-lg hover:bg-white/10 lg:hidden text-white transition-all duration-300 z-50 relative"
+      className="flex size-12 items-center justify-center rounded-lg hover:bg-black/5 lg:hidden text-zinc-955 transition-all duration-300 z-50 relative"
       aria-label={isOpen ? 'Close menu' : 'Open menu'}
     >
       <AnimatePresence mode="wait">
@@ -108,10 +102,10 @@ function MobileNav({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black/95 backdrop-blur-xl"
+            className="absolute inset-0 bg-amber-400/90 backdrop-blur-xl"
             onClick={onClose}
           />
-          <div className="relative h-full flex flex-col items-center justify-center px-6">
+          <div className="relative h-full flex flex-col items-center justify-center px-6 bg-gradient-to-b from-amber-400/95 to-amber-500/95 backdrop-blur-xl">
             <motion.div
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -119,7 +113,7 @@ function MobileNav({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
               className="mb-16"
             >
               <Link href="/" onClick={onClose}>
-                <Logo className="h-24 md:h-32" />
+                <Logo className="h-16" />
               </Link>
             </motion.div>
             <nav className="flex flex-col items-center gap-6 w-full max-w-sm">
@@ -134,7 +128,7 @@ function MobileNav({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
                   }}
                   exit={{ y: 20, opacity: 0 }}
                   onClick={() => scrollToSection(href)}
-                  className="text-2xl font-medium text-white/90 hover:text-amber-500 transition-colors py-2 px-8 w-full text-center"
+                  className="text-2xl font-black text-zinc-955 hover:text-primary-dark transition-colors py-2 px-8 w-full text-center"
                 >
                   {label}
                 </motion.button>
@@ -147,18 +141,10 @@ function MobileNav({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
               className="mt-12 flex gap-4"
             >
               <a
-                href="https://www.instagram.com/abells_burger/"
+                href="https://wa.me/5585991390194"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-white/10 rounded-full text-white hover:bg-amber-500 hover:text-black transition-all duration-300"
-              >
-                <InstagramIcon className="size-6" />
-              </a>
-              <a
-                href="https://wa.me/5585985497108"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 bg-white/10 rounded-full text-white hover:bg-green-500 hover:text-black transition-all duration-300"
+                className="p-3 bg-primary text-white hover:bg-primary-dark transition-all duration-300 rounded-full shadow-lg"
               >
                 <WhatsAppIcon className="size-6" />
               </a>
@@ -172,15 +158,14 @@ function MobileNav({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
 
 export function NavbarScroll({ banner }: { banner?: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { scrollY, scrollYProgress } = useScroll()
+  const { scrollY } = useScroll()
   const [isScrolled, setIsScrolled] = useState(false)
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down' | null>(null)
   const [lastScrollY, setLastScrollY] = useState(0)
 
-
-  const opacity = useTransform(scrollY, [0, 100], [1, 0.95])
-  const backdropBlur = useTransform(scrollY, [0, 100], ['blur(0px)', 'blur(12px)'])
-  const backgroundColor = useTransform(scrollY, [0, 100], ['rgba(0,0,0,0)', 'rgba(0,0,0,0.8)'])
+  const opacity = useTransform(scrollY, [0, 100], [1, 0.98])
+  const backdropBlur = useTransform(scrollY, [0, 100], ['blur(0px)', 'blur(8px)'])
+  const backgroundColor = useTransform(scrollY, [0, 100], ['rgba(251, 191, 36, 0)', 'rgba(251, 191, 36, 1)']) // Solid amber-400 (251,191,36) on scroll
 
   useEffect(() => {
     const handleScroll = () => {
@@ -210,13 +195,13 @@ export function NavbarScroll({ banner }: { banner?: React.ReactNode }) {
           backdropFilter: backdropBlur,
           backgroundColor,
         }}
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-white/5"
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-zinc-950/5 shadow-sm"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="flex justify-between items-center py-3">
             <div className="flex items-center gap-6">
               <Link href="/" title="Home" onClick={() => setMobileMenuOpen(false)}>
-                <Logo className="h-16 md:h-20" />
+                <Logo className="h-14" />
               </Link>
               {banner && (
                 <div className="hidden lg:flex items-center">
@@ -236,7 +221,7 @@ export function NavbarScroll({ banner }: { banner?: React.ReactNode }) {
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: isScrolled ? 1 : 0 }}
-          className="h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent origin-left"
+          className="h-px bg-gradient-to-r from-transparent via-primary-dark/30 to-transparent origin-left"
         />
       </motion.header>
 

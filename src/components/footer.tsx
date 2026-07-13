@@ -1,34 +1,33 @@
 import { PlusGrid, PlusGridItem, PlusGridRow } from '@/components/plus-grid'
 import { Button } from './button'
 import { Container } from './container'
-import { Gradient } from './gradient'
 import { Link } from './link'
 import { Logo } from './logo'
 import { Subheading } from './text'
 
 function CallToAction() {
   return (
-    <div className="relative pt-20 pb-16 text-center sm:py-24">
+    <div className="relative pt-20 pb-16 text-center sm:py-24 border-b border-zinc-950/10">
       <hgroup>
-        <Subheading>Ficou com fome?</Subheading>
-        <p className="mt-6 text-3xl font-medium tracking-tight text-gray-950 dark:text-white sm:text-5xl">
-          Peça o seu agora mesmo.
+        <Subheading className="text-primary-dark font-extrabold">Precisa de Atendimento?</Subheading>
+        <p className="mt-6 text-3xl font-black tracking-tight text-zinc-955 sm:text-5xl">
+          Agende sua consulta ou exame.
           <br />
-          Entregamos rapidinho na sua casa.
+          Atendimento ágil e de confiança.
         </p>
       </hgroup>
-      <p className="mx-auto mt-6 max-w-xs text-sm/6 text-gray-500 dark:text-gray-400">
-        O melhor blend, o pão mais macio e aquele molho especial que só a gente tem.
+      <p className="mx-auto mt-6 max-w-sm text-sm/6 text-zinc-900 font-bold">
+        Fale diretamente com nossa recepção no WhatsApp para conferir horários disponíveis de médicos e dentistas.
       </p>
       <div className="mt-6 flex justify-center">
         <Button
           variant="whatsapp"
-          className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4"
-          href="https://wa.me/5585985497108"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-primary hover:bg-primary-dark text-white font-extrabold rounded-full shadow-lg border-2 border-primary-dark"
+          href="https://wa.me/5585991390194"
           target="_blank"
         >
           <SocialIconWhatsApp className="w-5 h-5 text-white" />
-          Pedir no WhatsApp
+          Agendar no WhatsApp
         </Button>
       </div>
     </div>
@@ -36,7 +35,7 @@ function CallToAction() {
 }
 
 function SitemapHeading({ children }: { children: React.ReactNode }) {
-  return <h3 className="text-sm/6 font-medium text-white/60">{children}</h3>
+  return <h3 className="text-sm/6 font-black text-zinc-955 uppercase tracking-widest">{children}</h3>
 }
 
 function SitemapLinks({ children }: { children: React.ReactNode }) {
@@ -48,7 +47,7 @@ function SitemapLink(props: React.ComponentPropsWithoutRef<typeof Link>) {
     <li>
       <Link
         {...props}
-        className="font-medium text-white/90 data-hover:text-amber-500 transition-colors"
+        className="font-extrabold text-zinc-900 data-hover:text-primary-dark transition-colors"
       />
     </li>
   )
@@ -58,26 +57,15 @@ function Sitemap() {
   return (
     <>
       <div>
-        <SitemapHeading>Menu</SitemapHeading>
+        <SitemapHeading>Navegação</SitemapHeading>
         <SitemapLinks>
-          <SitemapLink href="#sobre-nos">Nossa História</SitemapLink>
+          <SitemapLink href="#sobre-nos">Sobre Nós</SitemapLink>
           <SitemapLink href="#galeria">Galeria</SitemapLink>
-          <SitemapLink href="#destaques">Destaques</SitemapLink>
-          <SitemapLink href="#cardapio">Cardápio</SitemapLink>
+          <SitemapLink href="#destaques">Especialidades</SitemapLink>
           <SitemapLink href="#contato">Endereço & Contato</SitemapLink>
         </SitemapLinks>
       </div>
     </>
-  )
-}
-
-function SocialIconInstagram(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-    </svg>
   )
 }
 
@@ -91,74 +79,70 @@ function SocialIconWhatsApp(props: React.ComponentPropsWithoutRef<'svg'>) {
 
 function SocialLinks() {
   return (
-    <>
-      <Link
-        href="https://www.instagram.com/abells_burger/"
-        target="_blank"
-        aria-label="Siga-nos no Instagram"
-        className="text-gray-950 dark:text-white data-hover:text-gray-950/75 dark:data-hover:text-white/75"
-      >
-        <SocialIconInstagram className="size-4" />
-      </Link>
-      <Link
-        href="https://wa.me/5585985497108"
-        target="_blank"
-        aria-label="Contato via WhatsApp"
-        className="text-gray-950 dark:text-white data-hover:text-gray-950/75 dark:data-hover:text-white/75"
-      >
-        <SocialIconWhatsApp className="size-4" />
-      </Link>
-    </>
+    <Link
+      href="https://wa.me/5585991390194"
+      target="_blank"
+      aria-label="Contato via WhatsApp"
+      className="text-zinc-950 hover:text-primary-dark transition-colors"
+    >
+      <SocialIconWhatsApp className="size-6" />
+    </Link>
   )
 }
 
 function Copyright() {
   return (
-    <div className="text-sm/6 text-white/60 text-center sm:text-left">
-      <span>&copy; {new Date().getFullYear()} Abell's Gastroburger.</span>
+    <div className="text-sm/6 text-zinc-900/90 text-center sm:text-left font-semibold">
+      <span>&copy; {new Date().getFullYear()} Clínica Dr. Brasil.</span>
       <span className="block sm:inline"> Todos os direitos reservados.</span>
+      <span className="block text-xs mt-1 text-zinc-800">Resp. Técnico: Dr. Pedro Henrique Galvão | CNPJ: 55.437.288/0001-90</span>
     </div>
   )
 }
 
 export function Footer() {
   return (
-    <footer className="relative mt-24 bg-zinc-950 border-t border-white/10 rounded-t-[2.5rem] sm:rounded-t-[3.5rem]">
-        <Container className="relative z-10 py-16">
-          <CallToAction />
-          
-          <div className="flex flex-col items-center justify-center py-12 border-t border-white/5">
-            <Logo className="h-20 sm:h-24 mb-6" />
-            <h1 className="text-3xl sm:text-4xl font-black italic tracking-tighter text-white text-center">
-              <span className="text-red-600 dark:text-red-500 text-shadow-glow">Abell's</span> <span className="text-amber-500">Gastroburger</span>
-            </h1>
-            <a href="https://www.google.com/maps/search/?api=1&query=Abells+Gastroburguer" target="_blank" className="mt-4 text-sm text-gray-400 hover:text-amber-500 transition-colors">
-              R. São Pedro, 150 - Fleicheiras, Trairi - CE, 62690-000
-            </a>
-          </div>
+    <footer className="relative bg-transparent border-t border-zinc-950/15 text-zinc-955">
+      <Container className="relative z-10 py-16">
+        <CallToAction />
+        
+        <div className="flex flex-col items-center justify-center py-12 border-b border-zinc-950/10">
+          <Logo className="h-16 mb-4" />
+          <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-zinc-955 text-center leading-tight">
+            <span className="text-primary-dark">Dr. Brasil</span> <span className="font-bold">Clínica Médica e Odontológica</span>
+          </h2>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Rua+Gomes+da+Silva+47+Centro+Apuiares+CE"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 text-sm text-zinc-900 hover:text-primary-dark transition-colors font-extrabold"
+          >
+            Rua Gomes da Silva, nº 47 - Centro, Apuiarés - CE, CEP: 62630-000
+          </a>
+        </div>
 
-          <PlusGrid className="pb-16 text-white/70">
-            <PlusGridRow>
-              <div className="flex justify-center pb-12">
-                <div className="grid grid-cols-1 text-center">
-                  <Sitemap />
-                </div>
+        <PlusGrid className="pb-16 text-zinc-900">
+          <PlusGridRow className="border-zinc-950/10">
+            <div className="flex justify-center pb-12">
+              <div className="grid grid-cols-1 text-center">
+                <Sitemap />
               </div>
-            </PlusGridRow>
-            <PlusGridRow className="flex flex-col sm:flex-row justify-between items-center gap-8">
-              <div>
-                <PlusGridItem className="py-3">
-                  <Copyright />
-                </PlusGridItem>
-              </div>
-              <div className="flex">
-                <PlusGridItem className="flex items-center gap-8 py-3">
-                  <SocialLinks />
-                </PlusGridItem>
-              </div>
-            </PlusGridRow>
-          </PlusGrid>
-        </Container>
+            </div>
+          </PlusGridRow>
+          <PlusGridRow className="flex flex-col sm:flex-row justify-between items-center gap-8 border-zinc-950/10">
+            <div>
+              <PlusGridItem className="py-3 border-zinc-950/10">
+                <Copyright />
+              </PlusGridItem>
+            </div>
+            <div className="flex">
+              <PlusGridItem className="flex items-center gap-8 py-3 border-zinc-950/10">
+                <SocialLinks />
+              </PlusGridItem>
+            </div>
+          </PlusGridRow>
+        </PlusGrid>
+      </Container>
     </footer>
   )
 }
